@@ -1,36 +1,31 @@
 {
   "compilerOptions": {
-    "incremental": true,
-    "target": "ES2019",
-    "module": "commonjs",
+    "baseUrl": "src",
+    "target": "es5",
     "lib": [
       "dom",
-      "ESNext"
+      "dom.iterable",
+      "esnext"
     ],
     "allowJs": true,
-    "checkJs": false,
-    "composite": true,
-    "noEmit": false,
-    "declaration": true,
-    "declarationMap": true,
-    "sourceMap": true,
     "skipLibCheck": true,
     "strict": true,
-    "noImplicitAny": false,
-    "strictNullChecks": true,
-    "useUnknownInCatchVariables": false,
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true,
-    "types": [
-      "jest",
-      "node"
-    ]
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true
   },
-  "include": [],
-  "references": [
-    {
-      "path": "packages/app-nextjs-bootstrap-1"
-    }
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
   ]
 }

@@ -1,26 +1,21 @@
 module.exports = {
-  preset: 'ts-jest',
-  testEnvironment: 'node',
-  testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.ts$',
-  testPathIgnorePatterns: [
-    '/node_modules/',
-    '/dist/',
-    '/goldstackLocal/',
-    '/distWeb/',
-    '/distLambda/',
-    '.d.ts',
+  testEnvironment: 'jsdom',
+  testPathIgnorePatterns: ['/node_modules/', '/.next/'],
+  collectCoverage: true,
+  collectCoverageFrom: [
+    'src/**/*.ts(x)?',
+    '!src/**/stories.tsx',
+    '!src/pages/**/*.tsx',
+    '!src/styles/**/*.ts',
+    '!src/types/**/*.d.ts'
   ],
-  globals: {
-    'ts-jest': {
-      tsconfig: 'tsconfig.base.json',
-    },
+  setupFilesAfterEnv: ['<rootDir>/.jest/setup.ts'],
+  modulePaths: ['<rootDir>/src/', '<rootDir>/.jest'],
+  transform: {
+    '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest', { presets: ['next/babel'] }]
   },
-  coverageThreshold: {
-    global: {
-      branches: 90,
-      functions: 90,
-      lines: 90,
-      statements: 90,
-    },
-  },
-};
+  moduleNameMapper: {
+    '^styled-components':
+      '<rootDir>/node_modules/styled-components/dist/styled-components.browser.cjs.js'
+  }
+}
