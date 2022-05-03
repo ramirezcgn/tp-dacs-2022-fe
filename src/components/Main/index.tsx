@@ -1,4 +1,4 @@
-import * as S from './styles'
+import * as S from './styles';
 
 const Main = ({
   title = 'NextJs Boilerplate',
@@ -8,6 +8,6 @@ const Main = ({
     <S.Title>{title}</S.Title>
     <S.Description>{description}</S.Description>
   </S.Wrapper>
-)
+);
 
-export default Main
+export default Main;
