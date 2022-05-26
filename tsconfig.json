@@ -27,5 +27,6 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ]
+  ],
+  "rootDirs": ["./src"]
 }
