@@ -4,9 +4,10 @@ const isProd = process.env.NODE_ENV === 'production'
 
 module.exports = withPWA({
   swcMinify: true,
+  reactStrictMode: true,
   experimental: {
     // Enables the styled-components SWC transform
-    styledComponents: true
+    styledComponents: false
   },
   pwa: {
     dest: 'public',

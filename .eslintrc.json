@@ -46,10 +46,14 @@
   ],
   "rules": {
     "linebreak-style": ["error", "windows"],
+    "no-prototype-builtins": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "react/prop-types": "off",
+    "react/display-name": "off",
     "react/react-in-jsx-scope": "off",
+    "@typescript-eslint/ban-types": "off",
+    "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "react/jsx-filename-extension": [
       1,
@@ -66,6 +70,6 @@
         "ts": "never",
         "tsx": "never"
       }
-    ],
+    ]
   }
 }

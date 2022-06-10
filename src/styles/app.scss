@@ -1,0 +1,185 @@
+/*
+ * Common sass imports, use this file to not replicate changes in all files
+ * @NOTE: Prepend a `~` to css file paths that are in your node_modules
+ *        See https://github.com/webpack-contrib/sass-loader#imports
+ */
+
+//Custom values
+@import 'styles/variables';
+@import 'styles/fonts';
+
+//Font Awesome files
+@import '~font-awesome/scss/font-awesome';
+
+//Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+$fixedFooterHeight: 50px;
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+footer {
+  height: $fixedFooterHeight;
+  box-sizing: content-box;
+}
+
+th small {
+  font-weight: bold;
+}
+
+.fixed-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 3;
+}
+
+.extra {
+  padding-bottom: $fixedFooterHeight;
+  background-color: white;
+  border-top: 1px solid lightgray;
+}
+
+.copyright {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: $fixedFooterHeight;
+  line-height: $fixedFooterHeight;
+  background-color: #343a40 !important;
+
+  > .container {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+
+  a {
+    color: white;
+  }
+}
+
+#footer-left {
+  direction: ltr;
+}
+
+#footer-right {
+  direction: rtl;
+}
+
+#footer-left,
+#footer-right {
+  align-self: flex-end;
+
+  > * {
+    margin: 5px 0;
+  }
+
+  > div {
+    display: inline-flex;
+  }
+
+  button,
+  .loading-button {
+    margin-left: 15px;
+  }
+
+  .loading-button button {
+    margin-left: 0;
+  }
+}
+
+.alumno-not-found {
+  background-color: #FFBABA;
+}
+
+.modal-body .table th, .modal-body .table td {
+  padding: 4px 12px;
+}
+
+.modal-body .table th.actions {
+  width: 150px;
+  text-align: center;
+}
+
+.modal-body .table .form-control {
+  height: auto;
+  padding: 3px 6px;
+}
+
+.loading-spinner {
+  position: relative;
+  top: 25vh;
+  left: calc(50vw - 25px);
+}
+
+.partial-spinner {
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, .5);
+
+  .loading-spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  }
+}
+
+.order_button {
+  color: inherit;
+  position: relative;
+  padding-right: 10px;
+  display: block;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  span {
+    font-size: 11px;
+    position: absolute;
+    top: calc(50% - 5px);
+    right: 0;
+
+    &::before {
+      content: "\f0dc";
+    }
+
+    &.selected {
+      &.desc::before {
+        content: "\f0dd";
+      }
+
+      &.asc::before {
+        content: "\f0de";
+      }
+    }
+  }
+}
+
+.loading-button {
+  position: relative;
+
+  .spinner-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, .3);
+
+    .spinner-border {
+      position: absolute;
+      top: 2px;
+      left: calc(50% - 20px);
+    }
+  }
+}

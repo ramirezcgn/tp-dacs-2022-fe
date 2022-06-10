@@ -11,6 +11,8 @@
     "skipLibCheck": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
@@ -18,7 +20,11 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "incremental": true
+    "incremental": true,
+    "paths": {
+      "_constants": ["constants"],
+      "_constants/*": ["constants/*"],
+    }
   },
   "exclude": [
     "node_modules"
