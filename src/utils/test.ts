@@ -115,7 +115,7 @@ const initialErrors: Validations = {
 */
 
 import { Validator } from './validator';
-import type { Rules, TestValues } from './validator';
+import type { Rules, TestValues, TestResults } from './validator';
 
 const testValidations: Rules = {
   text: {
@@ -128,11 +128,11 @@ const testValidations: Rules = {
   },
   maxText: {
     type: 'text',
-    validations: ['required', 'max:10'],
+    validations: ['required', 'max:6'],
   },
   betweenText: {
     type: 'text',
-    validations: ['required', 'between:3:10'],
+    validations: ['required', 'between:3:6'],
   },
   email: {
     type: 'email',
@@ -148,25 +148,64 @@ const testValidations: Rules = {
   },
   maxNumber: {
     type: 'number',
-    validations: ['required', 'max:10'],
+    validations: ['required', 'max:6'],
   },
   betweenNumber: {
     type: 'number',
-    validations: ['required', 'between:3:10'],
+    validations: ['required', 'between:3:6'],
+  },
+};
+
+const results: TestResults = {
+  text: {
+    name: 'Text',
+    error: '',
+  },
+  minText: {
+    name: 'minText',
+    error: '',
+  },
+  maxText: {
+    name: 'maxText',
+    error: '',
+  },
+  betweenText: {
+    name: 'betweenText',
+    error: '',
+  },
+  email: {
+    name: 'email',
+    error: '',
+  },
+  number: {
+    name: 'number',
+    error: '',
+  },
+  minNumber: {
+    name: 'minNumber',
+    error: '',
+  },
+  maxNumber: {
+    name: 'maxNumber',
+    error: '',
+  },
+  betweenNumber: {
+    name: 'betweenNumber',
+    error: '',
   },
 };
 
 const testValues: TestValues = {
-  text: 'hola',
-  minText: 'chau',
-  maxText: 'asdf',
-  betweenText: 'asdf',
+  text: '',
+  minText: 'ch',
+  maxText: 'asdfasdf',
+  betweenText: 'asdfasdf',
   email: 'asdf',
-  number: '11',
-  minNumber: '11',
+  number: 'hola',
+  minNumber: '1',
   maxNumber: '11',
   betweenNumber: '11',
 };
 
 const v = new Validator(testValidations);
-console.log(v.validate(testValues));
+console.log(v.validate(testValues, results), results);

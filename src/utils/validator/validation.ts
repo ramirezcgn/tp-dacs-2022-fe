@@ -1,8 +1,14 @@
 import { ExtractInstanceType } from './common';
 import { TypeFactory, TypeKey, TypeItem } from './type';
 
+export type ResultEntry = {
+  name: string;
+  error: string;
+};
+
 interface IValidation {
   validate(): boolean;
+  validateResult(result: ResultEntry): boolean;
 }
 
 abstract class Validation implements IValidation {
@@ -15,11 +21,28 @@ abstract class Validation implements IValidation {
   validate(): boolean {
     return this.input.valid();
   }
+
+  validateResult(result: ResultEntry) {
+    const valid = this.validate();
+    result.error = valid ? '' : `The field ${result.name} is invalid`;
+    return valid;
+  }
 }
 
 class RequiredValidation extends Validation {
   validate() {
     return super.validate() && !this.input.empty();
+  }
+
+  validateResult(result: ResultEntry) {
+    if (super.validateResult(result)) {
+      const valid = this.validate();
+      result.error = valid
+        ? ''
+        : `The field ${result.name} should have a value`;
+      return valid;
+    }
+    return false;
   }
 }
 
@@ -34,6 +57,17 @@ class MinValidation extends RequiredValidation {
   validate() {
     return super.validate() && this.input.size() >= this.min;
   }
+
+  validateResult(result: ResultEntry) {
+    if (super.validateResult(result)) {
+      const valid = this.validate();
+      result.error = valid
+        ? ''
+        : `The field ${result.name} should have a value bigger than ${this.min}`;
+      return valid;
+    }
+    return false;
+  }
 }
 
 class MaxValidation extends RequiredValidation {
@@ -46,6 +80,17 @@ class MaxValidation extends RequiredValidation {
 
   validate() {
     return super.validate() && this.input.size() <= this.max;
+  }
+
+  validateResult(result: ResultEntry) {
+    if (super.validateResult(result)) {
+      const valid = this.validate();
+      result.error = valid
+        ? ''
+        : `The field ${result.name} should have a value lower than ${this.max}`;
+      return valid;
+    }
+    return false;
   }
 }
 
@@ -66,6 +111,17 @@ class BetweenValidation extends RequiredValidation {
       this.input.size() <= this.max
     );
   }
+
+  validateResult(result: ResultEntry) {
+    if (super.validateResult(result)) {
+      const valid = this.validate();
+      result.error = valid
+        ? ''
+        : `The field ${result.name} should have a value between ${this.min} and ${this.max}`;
+      return valid;
+    }
+    return false;
+  }
 }
 
 class EqualValidation extends Validation {
@@ -79,6 +135,17 @@ class EqualValidation extends Validation {
   validate() {
     if (this.other) {
       return this.input.equal(this.other);
+    }
+    return false;
+  }
+
+  validateResult(result: ResultEntry) {
+    if (super.validateResult(result)) {
+      const valid = this.validate();
+      result.error = valid
+        ? ''
+        : `The field ${result.name} should equal ${this.other}`;
+      return valid;
     }
     return false;
   }
@@ -98,6 +165,10 @@ export class CompositeValidation implements IValidation {
 
   public validate(): boolean {
     return this.children.every((va) => va.validate());
+  }
+
+  public validateResult(result: ResultEntry): boolean {
+    return this.children.every((va) => va.validateResult(result));
   }
 }
 
@@ -135,7 +206,9 @@ export class ValidationRule {
     this.type = TypeFactory.createInstance(type as TypeKey);
     this.validations = new CompositeValidation();
     validations.forEach((val) => {
-      const [rule, ...params] = val.split(':');
+      // eslint-disable-next-line prefer-const
+      let [rule, ...params] = val.split(':');
+      params = params.map((v) => this.castValue(v));
       if (rule in validationsMap) {
         const validation = ValidationFactory.createInstance(
           rule as validationKey,
@@ -149,8 +222,19 @@ export class ValidationRule {
     });
   }
 
-  validate(value: any): boolean {
+  castValue(v: string) {
+    try {
+      return JSON.parse(v);
+    } catch (error) {
+      return v;
+    }
+  }
+
+  validate(value: any, result?: ResultEntry): boolean {
     this.type.set(value);
+    if (result) {
+      return this.validations.validateResult(result);
+    }
     return this.validations.validate();
   }
 }

@@ -1,4 +1,5 @@
 import { ValidationRule } from './validation';
+import type { ResultEntry } from './validation';
 import { TypeKey } from './type';
 
 export type Rule = {
@@ -12,6 +13,10 @@ export type Rules = {
 
 export type TestValues = {
   [key: string]: string | string[];
+};
+
+export type TestResults = {
+  [key: string]: ResultEntry;
 };
 
 type ValidatorRules = {
@@ -31,12 +36,16 @@ export class Validator {
     );
   }
 
-  validate(values: TestValues) {
-    return Object.entries(values).every(([key, value]) => {
+  validate(values: TestValues, results: TestResults) {
+    return Object.entries(values).reduce((acc, [key, value]) => {
+      let valid = true;
       if (key in this.rules) {
-        return this.rules[key].validate(value);
+        valid = this.rules[key].validate(
+          value,
+          key in results ? results[key] : undefined,
+        );
       }
-      return true;
-    });
+      return acc && valid;
+    }, true);
   }
 }
