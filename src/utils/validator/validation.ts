@@ -112,12 +112,13 @@ const validationsMap = {
 type validationKey = keyof typeof validationsMap;
 type typeofValidations = typeof validationsMap[validationKey];
 type ValidationItem = ExtractInstanceType<typeofValidations, any>;
+type RestParams = [any?, any?];
 
 export class ValidationFactory {
   static createInstance(
     type: validationKey,
     input: TypeItem,
-    ...params: any
+    params: RestParams,
   ): ValidationItem {
     if (!(type in validationsMap)) {
       throw Error('Invalid validation type');
@@ -139,7 +140,7 @@ export class ValidationRule {
         const validation = ValidationFactory.createInstance(
           rule as validationKey,
           this.type,
-          params,
+          params as RestParams,
         );
         if (validation) {
           this.validations.add(validation);
