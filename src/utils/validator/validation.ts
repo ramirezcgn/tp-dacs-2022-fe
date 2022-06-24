@@ -7,8 +7,7 @@ export type ResultEntry = {
 };
 
 interface IValidation {
-  validate(): boolean;
-  validateResult(result: ResultEntry): boolean;
+  validate(result?: ResultEntry): boolean;
 }
 
 abstract class Validation implements IValidation {
@@ -18,8 +17,12 @@ abstract class Validation implements IValidation {
     this.input = input;
   }
 
-  validate(): boolean {
-    return this.input.valid();
+  validate(result?: ResultEntry): boolean {
+    const valid = this.input.valid();
+    if (result) {
+      result.error = valid ? '' : `The field ${result.name} is invalid`;
+    }
+    return valid;
   }
 
   validateResult(result: ResultEntry) {
@@ -30,16 +33,14 @@ abstract class Validation implements IValidation {
 }
 
 class RequiredValidation extends Validation {
-  validate() {
-    return super.validate() && !this.input.empty();
-  }
-
-  validateResult(result: ResultEntry) {
-    if (super.validateResult(result)) {
-      const valid = this.validate();
-      result.error = valid
-        ? ''
-        : `The field ${result.name} should have a value`;
+  validate(result?: ResultEntry) {
+    if (super.validate(result)) {
+      const valid = !this.input.empty();
+      if (result) {
+        result.error = valid
+          ? ''
+          : `The field ${result.name} should have a value`;
+      }
       return valid;
     }
     return false;
@@ -54,16 +55,14 @@ class MinValidation extends RequiredValidation {
     this.min = min;
   }
 
-  validate() {
-    return super.validate() && this.input.size() >= this.min;
-  }
-
-  validateResult(result: ResultEntry) {
-    if (super.validateResult(result)) {
-      const valid = this.validate();
-      result.error = valid
-        ? ''
-        : `The field ${result.name} should have a value bigger than ${this.min}`;
+  validate(result?: ResultEntry) {
+    if (super.validate(result)) {
+      const valid = this.input.size() >= this.min;
+      if (result) {
+        result.error = valid
+          ? ''
+          : `The field ${result.name} should have a value bigger than ${this.min}`;
+      }
       return valid;
     }
     return false;
@@ -78,16 +77,14 @@ class MaxValidation extends RequiredValidation {
     this.max = max;
   }
 
-  validate() {
-    return super.validate() && this.input.size() <= this.max;
-  }
-
-  validateResult(result: ResultEntry) {
-    if (super.validateResult(result)) {
-      const valid = this.validate();
-      result.error = valid
-        ? ''
-        : `The field ${result.name} should have a value lower than ${this.max}`;
+  validate(result?: ResultEntry) {
+    if (super.validate(result)) {
+      const valid = this.input.size() <= this.max;
+      if (result) {
+        result.error = valid
+          ? ''
+          : `The field ${result.name} should have a value lower than ${this.max}`;
+      }
       return valid;
     }
     return false;
@@ -104,20 +101,15 @@ class BetweenValidation extends RequiredValidation {
     this.max = max;
   }
 
-  validate() {
-    return (
-      super.validate() &&
-      this.input.size() >= this.min &&
-      this.input.size() <= this.max
-    );
-  }
-
-  validateResult(result: ResultEntry) {
-    if (super.validateResult(result)) {
-      const valid = this.validate();
-      result.error = valid
-        ? ''
-        : `The field ${result.name} should have a value between ${this.min} and ${this.max}`;
+  validate(result?: ResultEntry) {
+    if (super.validate(result)) {
+      const valid =
+        this.input.size() >= this.min && this.input.size() <= this.max;
+      if (result) {
+        result.error = valid
+          ? ''
+          : `The field ${result.name} should have a value between ${this.min} and ${this.max}`;
+      }
       return valid;
     }
     return false;
@@ -132,19 +124,14 @@ class EqualValidation extends Validation {
     this.other = other;
   }
 
-  validate() {
-    if (this.other) {
-      return this.input.equal(this.other);
-    }
-    return false;
-  }
-
-  validateResult(result: ResultEntry) {
-    if (super.validateResult(result)) {
-      const valid = this.validate();
-      result.error = valid
-        ? ''
-        : `The field ${result.name} should equal ${this.other}`;
+  validate(result?: ResultEntry) {
+    if (super.validate(result)) {
+      const valid = this.other && this.input.equal(this.other);
+      if (result) {
+        result.error = valid
+          ? ''
+          : `The field ${result.name} should be equal to ${this.other}`;
+      }
       return valid;
     }
     return false;
@@ -163,12 +150,8 @@ export class CompositeValidation implements IValidation {
     this.children.splice(validationIndex, 1);
   }
 
-  public validate(): boolean {
-    return this.children.every((va) => va.validate());
-  }
-
-  public validateResult(result: ResultEntry): boolean {
-    return this.children.every((va) => va.validateResult(result));
+  public validate(result?: ResultEntry): boolean {
+    return this.children.every((va) => va.validate(result));
   }
 }
 
@@ -232,9 +215,6 @@ export class ValidationRule {
 
   validate(value: any, result?: ResultEntry): boolean {
     this.type.set(value);
-    if (result) {
-      return this.validations.validateResult(result);
-    }
-    return this.validations.validate();
+    return this.validations.validate(result);
   }
 }
