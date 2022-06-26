@@ -1,6 +1,6 @@
-import { ValidationRule } from './validation';
-import type { ResultEntry } from './validation';
-import { TypeKey } from './type';
+import { ValidationRule } from './validations';
+import type { ResultEntry } from './validations';
+import { TypeKey } from './types';
 
 export type Rule = {
   type: TypeKey;
