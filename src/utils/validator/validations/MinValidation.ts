@@ -1,8 +1,8 @@
-import RequiredValidation from './RequiredValidation';
-import type { ResultEntry } from './IValidation';
-import type { TypeItem } from '../types';
+import { Validation } from './Validation';
+import type { TypeItem } from '../valueTypes';
+import type { ResultEntry } from '../types';
 
-export default class MinValidation extends RequiredValidation {
+export default class MinValidation extends Validation {
   min: number;
 
   constructor(input: TypeItem, min: number) {

@@ -1,12 +1,12 @@
 import { ValidationFactory, validationsMap } from './ValidationFactory';
 import CompositeValidation from './CompositeValidation';
-import { TypeFactory } from '../types';
-import type { ResultEntry } from './IValidation';
-import type { TypeKey, TypeItem } from '../types';
+import { TypeFactory } from '../valueTypes';
+import type { TypeKey, TypeItem } from '../valueTypes';
+import type { IValidationRule, ResultEntry } from '../types';
 
 type RestParams = [any?, any?];
 
-export class ValidationRule {
+export class ValidationRule implements IValidationRule {
   validations: CompositeValidation;
   type: TypeItem;
 

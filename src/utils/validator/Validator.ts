@@ -1,27 +1,5 @@
 import { ValidationRule } from './validations';
-import type { ResultEntry } from './validations';
-import { TypeKey } from './types';
-
-export type Rule = {
-  type: TypeKey;
-  validations: string[];
-};
-
-export type Rules = {
-  [key: string]: Rule;
-};
-
-export type TestValues = {
-  [key: string]: string | string[];
-};
-
-export type TestResults = {
-  [key: string]: ResultEntry;
-};
-
-type ValidatorRules = {
-  [key: string]: ValidationRule;
-};
+import type { ValidatorRules, Rules, TestValues, TestResults } from './types';
 
 export class Validator {
   rules: ValidatorRules = {};

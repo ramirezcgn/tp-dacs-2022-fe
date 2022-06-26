@@ -1,6 +1,6 @@
 import { Validation } from './Validation';
-import type { ResultEntry } from './IValidation';
-import type { TypeItem } from '../types';
+import type { TypeItem } from '../valueTypes';
+import type { ResultEntry } from '../types';
 
 export default class EqualValidation extends Validation {
   other: TypeItem;

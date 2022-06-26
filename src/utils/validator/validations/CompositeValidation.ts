@@ -1,4 +1,4 @@
-import type { IValidation, ResultEntry } from './IValidation';
+import type { IValidation, ResultEntry } from '../types';
 
 export default class CompositeValidation implements IValidation {
   protected children: IValidation[] = [];

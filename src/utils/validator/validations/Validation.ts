@@ -1,5 +1,5 @@
-import type { TypeItem } from '../types';
-import type { IValidation, ResultEntry } from './IValidation';
+import type { TypeItem } from '../valueTypes';
+import type { IValidation, ResultEntry } from '../types';
 
 export abstract class Validation implements IValidation {
   input: TypeItem;

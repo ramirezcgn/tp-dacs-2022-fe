@@ -3,7 +3,7 @@ import MinValidation from './MinValidation';
 import MaxValidation from './MaxValidation';
 import BetweenValidation from './BetweenValidation';
 import EqualValidation from './EqualValidation';
-import type { TypeItem } from '../types';
+import type { TypeItem } from '../valueTypes';
 
 export const validationsMap = {
   required: RequiredValidation,

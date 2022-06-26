@@ -1,5 +1,5 @@
 import { Validation } from './Validation';
-import type { ResultEntry } from './IValidation';
+import type { ResultEntry } from '../types';
 
 export default class RequiredValidation extends Validation {
   validate(result?: ResultEntry) {

@@ -1,6 +1,6 @@
 import RequiredValidation from './RequiredValidation';
-import type { ResultEntry } from './IValidation';
-import type { TypeItem } from '../types';
+import type { ResultEntry } from '../types';
+import type { TypeItem } from '../valueTypes';
 
 export default class BetweenValidation extends RequiredValidation {
   min: number;
