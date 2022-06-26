@@ -7,7 +7,7 @@ export default class MinValidation extends RequiredValidation {
 
   constructor(input: TypeItem, min: number) {
     super(input);
-    this.min = min;
+    this.min = min || 0;
   }
 
   validate() {

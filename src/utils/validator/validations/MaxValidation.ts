@@ -7,7 +7,7 @@ export default class MaxValidation extends RequiredValidation {
 
   constructor(input: TypeItem, max: number) {
     super(input);
-    this.max = max;
+    this.max = max || Infinity;
   }
 
   validate() {

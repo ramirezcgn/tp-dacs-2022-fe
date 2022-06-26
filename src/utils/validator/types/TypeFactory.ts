@@ -3,12 +3,16 @@ import NumberType from './NumberType';
 import ArrayType from './ArrayType';
 import EmailType from './EmailType';
 import UsernameType from './UsernameType';
+import FileType from './FileType';
+import PasswordType from './PasswordType';
 
 const typesMap = {
   text: StringType,
   number: NumberType,
   array: ArrayType,
   email: EmailType,
+  file: FileType,
+  password: PasswordType,
   username: UsernameType,
 };
 
