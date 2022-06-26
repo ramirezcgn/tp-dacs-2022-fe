@@ -1,6 +1,8 @@
 import GenericType from './GenericType';
 
 export default class NumberType extends GenericType<string> {
+  static type = 'number';
+
   realValue?: number;
 
   set(value: string) {

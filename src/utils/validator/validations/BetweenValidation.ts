@@ -1,8 +1,10 @@
-import RequiredValidation from './RequiredValidation';
-import type { ResultEntry } from '../types';
+import { Validation } from './Validation';
 import type { TypeItem } from '../valueTypes';
+import type { Logger } from '../types';
 
-export default class BetweenValidation extends RequiredValidation {
+export default class BetweenValidation extends Validation {
+  static type = 'between';
+
   min: number;
   max: number;
 
@@ -12,16 +14,16 @@ export default class BetweenValidation extends RequiredValidation {
     this.max = max;
   }
 
-  validate(result?: ResultEntry) {
-    if (super.validate(result)) {
-      const valid =
-        this.input.size() >= this.min && this.input.size() <= this.max;
-      if (result) {
-        result.error = valid
-          ? ''
-          : `The field ${result.name} should have a value between ${this.min} and ${this.max}`;
-      }
-      return valid;
+  validate(logger: Logger) {
+    if (super.validate(logger)) {
+      return logger(
+        BetweenValidation.type,
+        this.input.size() >= this.min && this.input.size() <= this.max,
+        {
+          min: this.min,
+          max: this.max,
+        },
+      );
     }
     return false;
   }

@@ -1,6 +1,8 @@
 import GenericType from './GenericType';
 
-export default class StringType extends GenericType<string> {
+export default class TextType extends GenericType<string> {
+  static type = 'text';
+
   empty() {
     return !this.value;
   }

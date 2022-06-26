@@ -1,16 +1,18 @@
-import RequiredValidation from './RequiredValidation';
-import MinValidation from './MinValidation';
-import MaxValidation from './MaxValidation';
 import BetweenValidation from './BetweenValidation';
 import EqualValidation from './EqualValidation';
+import FileValidation from './FileValidation';
+import MaxValidation from './MaxValidation';
+import MinValidation from './MinValidation';
+import RequiredValidation from './RequiredValidation';
 import type { TypeItem } from '../valueTypes';
 
 export const validationsMap = {
-  required: RequiredValidation,
-  min: MinValidation,
-  max: MaxValidation,
-  between: BetweenValidation,
-  equal: EqualValidation,
+  [BetweenValidation.type]: BetweenValidation,
+  [EqualValidation.type]: EqualValidation,
+  [FileValidation.type]: FileValidation,
+  [MaxValidation.type]: MaxValidation,
+  [MinValidation.type]: MinValidation,
+  [RequiredValidation.type]: RequiredValidation,
 };
 
 type ExtractValidationInstance<T, K> = T extends new (v?: K) => infer R

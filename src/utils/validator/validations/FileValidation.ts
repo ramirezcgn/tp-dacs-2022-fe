@@ -1,9 +1,11 @@
 import { Validation } from './Validation';
 import type { TypeItem } from '../valueTypes';
 import FileType from '../valueTypes/FileType';
-import { FilesRules, ResultEntry } from '../types';
+import { FilesRules, Logger } from '../types';
 
 export default class FileValidation extends Validation {
+  static type = 'file';
+
   rules: FilesRules;
 
   constructor(input: TypeItem, rules: FilesRules) {
@@ -11,15 +13,9 @@ export default class FileValidation extends Validation {
     this.rules = rules;
   }
 
-  validate(result?: ResultEntry) {
-    if (super.validate(result)) {
-      const valid = this.validateFileProps();
-      if (result) {
-        result.error = valid
-          ? ''
-          : `The field ${result.name} not match files requirements`;
-      }
-      return valid;
+  validate(logger: Logger) {
+    if (super.validate(logger)) {
+      return logger(FileValidation.type, this.validateFileProps());
     }
     return false;
   }

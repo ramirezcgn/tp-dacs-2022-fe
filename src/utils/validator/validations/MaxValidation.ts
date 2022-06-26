@@ -1,8 +1,10 @@
 import { Validation } from './Validation';
 import type { TypeItem } from '../valueTypes';
-import type { ResultEntry } from '../types';
+import type { Logger } from '../types';
 
 export default class MaxValidation extends Validation {
+  static type = 'max';
+
   max: number;
 
   constructor(input: TypeItem, max: number) {
@@ -10,15 +12,11 @@ export default class MaxValidation extends Validation {
     this.max = max || Infinity;
   }
 
-  validate(result?: ResultEntry) {
-    if (super.validate(result)) {
-      const valid = this.input.size() <= this.max;
-      if (result) {
-        result.error = valid
-          ? ''
-          : `The field ${result.name} should have a value lower than ${this.max}`;
-      }
-      return valid;
+  validate(logger: Logger) {
+    if (super.validate(logger)) {
+      return logger(MaxValidation.type, this.input.size() <= this.max, {
+        max: this.max,
+      });
     }
     return false;
   }

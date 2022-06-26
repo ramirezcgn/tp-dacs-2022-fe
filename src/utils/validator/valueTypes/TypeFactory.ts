@@ -1,4 +1,4 @@
-import StringType from './StringType';
+import TextType from './TextType';
 import NumberType from './NumberType';
 import ArrayType from './ArrayType';
 import EmailType from './EmailType';
@@ -7,13 +7,13 @@ import FileType from './FileType';
 import PasswordType from './PasswordType';
 
 const typesMap = {
-  text: StringType,
-  number: NumberType,
-  array: ArrayType,
-  email: EmailType,
-  file: FileType,
-  password: PasswordType,
-  username: UsernameType,
+  [ArrayType.type]: ArrayType,
+  [EmailType.type]: EmailType,
+  [FileType.type]: FileType,
+  [NumberType.type]: NumberType,
+  [PasswordType.type]: PasswordType,
+  [TextType.type]: TextType,
+  [UsernameType.type]: UsernameType,
 };
 
 type ExtractTypeInstance<T, K> = T extends new (v?: K) => infer R ? R : never;

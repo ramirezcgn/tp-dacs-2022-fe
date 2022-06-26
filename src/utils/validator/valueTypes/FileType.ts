@@ -1,6 +1,8 @@
 import GenericType from './GenericType';
 
 export default class FileType extends GenericType<FileList> {
+  static type = 'file';
+
   files: File[] = [];
 
   set(value: FileList) {

@@ -1,8 +1,10 @@
 import { Validation } from './Validation';
 import type { TypeItem } from '../valueTypes';
-import type { ResultEntry } from '../types';
+import type { Logger } from '../types';
 
 export default class EqualValidation extends Validation {
+  static type = 'equal';
+
   other: TypeItem;
 
   constructor(input: TypeItem, other: TypeItem) {
@@ -10,15 +12,15 @@ export default class EqualValidation extends Validation {
     this.other = other;
   }
 
-  validate(result?: ResultEntry) {
-    if (super.validate(result)) {
-      const valid = this.other && this.input.equal(this.other);
-      if (result) {
-        result.error = valid
-          ? ''
-          : `The field ${result.name} should be equal to ${this.other}`;
-      }
-      return valid;
+  validate(logger: Logger) {
+    if (super.validate(logger)) {
+      return logger(
+        EqualValidation.type,
+        this.other && this.input.equal(this.other),
+        {
+          other: this.other.get(),
+        },
+      );
     }
     return false;
   }

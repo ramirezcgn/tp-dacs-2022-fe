@@ -1,6 +1,8 @@
 import GenericType from './GenericType';
 
 export default class ArrayType extends GenericType<string[]> {
+  static type = 'array';
+
   empty() {
     return !this.value || !this.value.length;
   }

@@ -3,8 +3,10 @@ export type ResultEntry = {
   error: string;
 };
 
+export type Logger = (rule: string, error: boolean, data?: any) => boolean;
+
 export interface IValidation {
-  validate(result?: ResultEntry): boolean;
+  validate(logger: Logger): boolean;
 }
 
 export interface IValidationRule {

@@ -1,8 +1,10 @@
 import { Validation } from './Validation';
 import type { TypeItem } from '../valueTypes';
-import type { ResultEntry } from '../types';
+import type { Logger } from '../types';
 
 export default class MinValidation extends Validation {
+  static type = 'min';
+
   min: number;
 
   constructor(input: TypeItem, min: number) {
@@ -10,15 +12,11 @@ export default class MinValidation extends Validation {
     this.min = min || 0;
   }
 
-  validate(result?: ResultEntry) {
-    if (super.validate(result)) {
-      const valid = this.input.size() >= this.min;
-      if (result) {
-        result.error = valid
-          ? ''
-          : `The field ${result.name} should have a value bigger than ${this.min}`;
-      }
-      return valid;
+  validate(logger: Logger) {
+    if (super.validate(logger)) {
+      return logger(MinValidation.type, this.input.size() >= this.min, {
+        min: this.min,
+      });
     }
     return false;
   }

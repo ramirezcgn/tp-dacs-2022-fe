@@ -1,4 +1,4 @@
-import type { IValidation, ResultEntry } from '../types';
+import type { IValidation, Logger } from '../types';
 
 export default class CompositeValidation implements IValidation {
   protected children: IValidation[] = [];
@@ -12,7 +12,7 @@ export default class CompositeValidation implements IValidation {
     this.children.splice(validationIndex, 1);
   }
 
-  public validate(result?: ResultEntry): boolean {
-    return this.children.every((va) => va.validate(result));
+  public validate(logger: Logger): boolean {
+    return this.children.every((va) => va.validate(logger));
   }
 }
