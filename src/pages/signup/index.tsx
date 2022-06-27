@@ -35,40 +35,32 @@ type State = {
 
 const validations: Rules = {
   username: {
+    name: 'Usuario',
     type: 'username',
     validations: ['required'],
   },
   email: {
+    name: 'Email',
     type: 'email',
     validations: ['required'],
   },
   password: {
+    name: 'Contraseña',
     type: 'password',
     validations: ['required'],
   },
   password_confirmation: {
+    name: 'Confirmar Contraseña',
     type: 'password',
     validations: ['required', 'equal:password'],
   },
 };
 
 const validationResults: TestResults = {
-  username: {
-    name: 'Usuario',
-    error: '',
-  },
-  email: {
-    name: 'Email',
-    error: '',
-  },
-  password: {
-    name: 'Contraseña',
-    error: '',
-  },
-  password_confirmation: {
-    name: 'Confirmar Contraseña',
-    error: '',
-  },
+  username: '',
+  email: '',
+  password: '',
+  password_confirmation: '',
 };
 
 const mapDispatchToProps = (dispatch: Function, { router }: any) => ({

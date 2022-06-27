@@ -29,32 +29,26 @@ type State = {
 
 const validations: Rules = {
   email: {
+    name: 'Email',
     type: 'email',
     validations: ['required'],
   },
   password: {
+    name: 'Contraseña',
     type: 'password',
     validations: ['required'],
   },
   password_confirmation: {
+    name: 'Confirmar Contraseña',
     type: 'password',
     validations: ['required', 'equal:password'],
   },
 };
 
 const validationResults: TestResults = {
-  email: {
-    name: 'Email',
-    error: '',
-  },
-  password: {
-    name: 'Contraseña',
-    error: '',
-  },
-  password_confirmation: {
-    name: 'Confirmar Contraseña',
-    error: '',
-  },
+  email: '',
+  password: '',
+  password_confirmation: '',
 };
 
 const mapDispatchToProps = (dispatch: Function, { router }: any) => ({

@@ -28,16 +28,14 @@ type State = {
 
 const validations: Rules = {
   email: {
+    name: 'Email',
     type: 'email',
     validations: ['required'],
   },
 };
 
 const validationResults: TestResults = {
-  email: {
-    name: 'Email',
-    error: '',
-  },
+  email: '',
 };
 
 const mapDispatchToProps = (dispatch: Function, { router }: any) => ({

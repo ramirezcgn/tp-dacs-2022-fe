@@ -31,24 +31,20 @@ type State = {
 
 const validations: Rules = {
   username: {
+    name: 'Usuario',
     type: 'username',
     validations: ['required'],
   },
   password: {
+    name: 'Contraseña',
     type: 'password',
     validations: ['required'],
   },
 };
 
 const validationResults: TestResults = {
-  username: {
-    name: 'Usuario',
-    error: '',
-  },
-  password: {
-    name: 'Contraseña',
-    error: '',
-  },
+  username: '',
+  password: '',
 };
 
 const mapDispatchToProps = (dispatch: Function, { router }: any) => ({
