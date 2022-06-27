@@ -15,7 +15,7 @@ import {
 } from 'reactstrap';
 import { customErrorsMsg } from '_constants';
 import { logIn } from 'actions';
-import { Validator, flattenValidationResults, mapFormElements } from 'utils';
+import { Validator, mapFormElements } from 'utils';
 import type { Rules, TestResults } from 'utils';
 
 type Props = {
@@ -82,7 +82,7 @@ export default class LogInComponent extends Component<Props, State> {
     let valid = true;
 
     if (!this.validator.validate(values, validationResults)) {
-      errors = flattenValidationResults(validationResults);
+      errors = validationResults;
       valid = false;
     }
 
