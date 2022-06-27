@@ -6,11 +6,11 @@ export class Validator {
 
   constructor(rules: Rules, customErrorsMsg?: any) {
     this.rules = Object.entries(rules).reduce(
-      (acc, [key, value]) => ({
-        ...acc,
-        [key]: new ValidationRule(this.rules, value, customErrorsMsg),
-      }),
-      {},
+      (acc: ValidatorRules, [key, value]) => {
+        acc[key] = new ValidationRule(this.rules, value, customErrorsMsg);
+        return acc;
+      },
+      this.rules,
     );
   }
 
