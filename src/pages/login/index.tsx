@@ -13,8 +13,10 @@ import {
   Button,
   FormFeedback,
 } from 'reactstrap';
-import { usernameRegex } from '_constants';
+import { customErrorsMsg } from '_constants';
 import { logIn } from 'actions';
+import { Validator, flattenValidationResults, mapFormElements } from 'utils';
+import type { Rules, TestResults } from 'utils';
 
 type Props = {
   attemptLogin: Function;
@@ -25,6 +27,28 @@ type State = {
     username: string;
     password: string;
   };
+};
+
+const validations: Rules = {
+  username: {
+    type: 'username',
+    validations: ['required'],
+  },
+  password: {
+    type: 'password',
+    validations: ['required'],
+  },
+};
+
+const validationResults: TestResults = {
+  username: {
+    name: 'Usuario',
+    error: '',
+  },
+  password: {
+    name: 'Contraseña',
+    error: '',
+  },
 };
 
 const mapDispatchToProps = (dispatch: Function, { router }: any) => ({
@@ -44,6 +68,8 @@ const mapDispatchToProps = (dispatch: Function, { router }: any) => ({
   connect(null, mapDispatchToProps),
 ) as any)
 export default class LogInComponent extends Component<Props, State> {
+  validator: Validator;
+
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -52,24 +78,20 @@ export default class LogInComponent extends Component<Props, State> {
         password: '',
       },
     };
+    this.validator = new Validator(validations, customErrorsMsg);
   }
 
   validate = (values: any = {}) => {
-    const errors: any = {};
+    let errors: any = {};
+    let valid = true;
 
-    if (!values.username) {
-      errors.username = 'Este campo es requerido';
-    } else if (!usernameRegex.test(values.username)) {
-      errors.username = 'Nombre de usuario inválido';
-    }
-
-    if (!values.password) {
-      errors.password = 'Este campo es requerido';
+    if (!this.validator.validate(values, validationResults)) {
+      errors = flattenValidationResults(validationResults);
+      valid = false;
     }
 
     this.setState({ errors });
-
-    return !Object.keys(errors).length;
+    return valid;
   };
 
   setErrors = (response: any) => {
@@ -86,11 +108,7 @@ export default class LogInComponent extends Component<Props, State> {
   doSubmit = (event: any) => {
     event.preventDefault();
     const { attemptLogin } = this.props;
-    const data = Object.fromEntries(
-      Array.from(event.target.elements)
-        .filter((item: any) => item.name)
-        .map((item: any) => [item.name, item.value]),
-    );
+    const data = mapFormElements(event.target.elements);
     if (this.validate(data)) {
       attemptLogin(data, this.setErrors);
     }

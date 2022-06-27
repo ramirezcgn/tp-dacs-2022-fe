@@ -21,7 +21,7 @@ export default class FileType extends GenericType<FileList> {
   }
 
   valid() {
-    return this.value instanceof FileList;
+    return !this.value || this.value instanceof FileList;
   }
 
   data() {

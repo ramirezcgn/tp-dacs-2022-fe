@@ -1,22 +1,25 @@
 import { Validation } from './Validation';
 import type { TypeItem } from '../valueTypes';
-import type { Logger } from '../types';
+import type { Logger, TestValues } from '../types';
 
 export default class EqualValidation extends Validation {
   static type = 'equal';
 
-  other: TypeItem;
+  other: string;
 
-  constructor(input: TypeItem, other: TypeItem) {
+  constructor(input: TypeItem, other: any) {
     super(input);
     this.other = other;
   }
 
-  validate(logger: Logger) {
+  validate(logger: Logger, values?: TestValues) {
     if (super.validate(logger)) {
-      const valid = this.other && this.input.equal(this.other);
+      let valid = false;
+      if (this.other && values && this.other in values) {
+        valid = this.input.equal(values[this.other] as any);
+      }
       logger(EqualValidation.type, valid, {
-        other: this.other.get(),
+        other: this.other,
       });
       return valid;
     }

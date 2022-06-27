@@ -23,7 +23,7 @@ export default class GenericType<T> implements IGenericType<T> {
     return true;
   }
 
-  equal(other: IGenericType<any>): boolean {
-    return JSON.stringify(this.value) === JSON.stringify(other.get());
+  equal(other: T): boolean {
+    return JSON.stringify(this.value) === JSON.stringify(other);
   }
 }

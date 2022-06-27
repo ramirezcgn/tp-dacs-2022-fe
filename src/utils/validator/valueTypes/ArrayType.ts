@@ -12,6 +12,6 @@ export default class ArrayType extends GenericType<string[]> {
   }
 
   valid() {
-    return Array.isArray(this.value);
+    return !this.value || Array.isArray(this.value);
   }
 }

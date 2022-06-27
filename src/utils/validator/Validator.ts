@@ -25,6 +25,7 @@ export class Validator {
       if (key in this.rules) {
         valid = this.rules[key].validate(
           value,
+          values,
           key in results ? results[key] : undefined,
         );
       }

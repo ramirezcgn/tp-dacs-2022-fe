@@ -5,6 +5,6 @@ export default class EmailType extends StringType {
   static type = 'email';
 
   valid() {
-    return emailRegex.test(this.value || '');
+    return !this.value || emailRegex.test(this.value);
   }
 }

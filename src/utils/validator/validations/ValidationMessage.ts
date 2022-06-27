@@ -21,6 +21,9 @@ export default class ValidationMessage {
   }
 
   getMessage(rule: string): string {
+    if (typeof this.errorsList[rule] === 'string') {
+      return this.errorsList[rule];
+    }
     if (this.type in this.errorsList[rule]) {
       return this.errorsList[rule][this.type];
     } else if ('default' in this.errorsList[rule]) {
@@ -48,6 +51,11 @@ export default class ValidationMessage {
       case 'between': {
         regex = /:field|:max|:min/gi;
         message = this.getMessage('between');
+        break;
+      }
+      case 'equal': {
+        regex = /:field|:other/gi;
+        message = this.getMessage('equal');
         break;
       }
       case 'max': {

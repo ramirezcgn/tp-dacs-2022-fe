@@ -8,6 +8,7 @@ import type {
   ValidationEntry,
   ResultEntry,
   CustomMessageFormatter,
+  TestValues,
 } from '../types';
 
 type RestParams = [any?, any?];
@@ -32,14 +33,12 @@ export class ValidationRule implements IValidationRule {
     );
     const validations = Array.isArray(entry) ? entry : this.formatEntry(entry);
     validations.forEach((val) => {
-      // eslint-disable-next-line prefer-const
-      let [rule, ...params] = val.split(':');
-      params = params.map((v) => this.castValue(v));
+      const [rule, ...params] = val.split(':');
       if (rule in validationsMap) {
         const validation = ValidationFactory.createInstance(
           rule,
           this.type,
-          params as RestParams,
+          this.formatParams(params),
         );
         if (validation) {
           this.validations.add(validation);
@@ -48,22 +47,25 @@ export class ValidationRule implements IValidationRule {
     });
   }
 
+  formatParams(params: string[]): RestParams {
+    return params.map((v: string) => {
+      try {
+        return JSON.parse(v);
+      } catch (error) {
+        return v;
+      }
+    }) as RestParams;
+  }
+
   formatEntry(entry) {
-    return Object.entries(entry).map(([key, value]) => {
-      return `${key}:${(Array.isArray(value) ? value : [value]).join(':')}`;
-    });
+    return Object.entries(entry).map(
+      ([key, value]) =>
+        `${key}:${(Array.isArray(value) ? value : [value]).join(':')}`,
+    );
   }
 
-  castValue(v: string) {
-    try {
-      return JSON.parse(v);
-    } catch (error) {
-      return v;
-    }
-  }
-
-  validate(value: any, result?: ResultEntry): boolean {
+  validate(value: any, values: TestValues, result?: ResultEntry): boolean {
     this.type.set(value);
-    return this.validations.validate(this.formatter.dump(result));
+    return this.validations.validate(this.formatter.dump(result), values);
   }
 }

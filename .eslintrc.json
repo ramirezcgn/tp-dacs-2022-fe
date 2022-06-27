@@ -45,6 +45,7 @@
     "prettier"
   ],
   "rules": {
+    "no-debugger": "off",
     "linebreak-style": ["error", "windows"],
     "no-prototype-builtins": "off",
     "react-hooks/rules-of-hooks": "error",

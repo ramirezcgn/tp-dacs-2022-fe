@@ -5,6 +5,6 @@ export default class PasswordType extends StringType {
   static type = 'password';
 
   valid() {
-    return passwordRegex.test(this.value || '');
+    return !this.value || passwordRegex.test(this.value);
   }
 }

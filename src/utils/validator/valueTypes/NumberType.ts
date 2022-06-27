@@ -7,7 +7,7 @@ export default class NumberType extends GenericType<string> {
 
   set(value: string) {
     super.set(value);
-    this.realValue = parseInt(value, 10);
+    this.realValue = parseFloat(value);
   }
 
   empty() {
@@ -19,6 +19,6 @@ export default class NumberType extends GenericType<string> {
   }
 
   valid() {
-    return this.realValue?.toString() === this.value;
+    return !this.value || this.realValue?.toString() === this.value;
   }
 }

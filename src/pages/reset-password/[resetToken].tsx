@@ -10,8 +10,10 @@ import {
   Button,
   FormFeedback,
 } from 'reactstrap';
-import { emailRegex } from '_constants';
+import { customErrorsMsg } from '_constants';
 import { passwordReset } from 'actions';
+import { Validator, flattenValidationResults, mapFormElements } from 'utils';
+import type { Rules, TestResults } from 'utils';
 
 type Props = {
   submitPasswordReset: Function;
@@ -23,6 +25,36 @@ type State = {
     password: string;
     password_confirmation: string;
   };
+};
+
+const validations: Rules = {
+  email: {
+    type: 'email',
+    validations: ['required'],
+  },
+  password: {
+    type: 'password',
+    validations: ['required'],
+  },
+  password_confirmation: {
+    type: 'password',
+    validations: ['required', 'equal:password'],
+  },
+};
+
+const validationResults: TestResults = {
+  email: {
+    name: 'Email',
+    error: '',
+  },
+  password: {
+    name: 'Contraseña',
+    error: '',
+  },
+  password_confirmation: {
+    name: 'Confirmar Contraseña',
+    error: '',
+  },
 };
 
 const mapDispatchToProps = (dispatch: Function, { router }: any) => ({
@@ -42,6 +74,8 @@ const mapDispatchToProps = (dispatch: Function, { router }: any) => ({
   connect(null, mapDispatchToProps),
 ) as any)
 export default class PasswordResetComponent extends Component<Props, State> {
+  validator: Validator;
+
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -51,30 +85,20 @@ export default class PasswordResetComponent extends Component<Props, State> {
         password_confirmation: '',
       },
     };
+    this.validator = new Validator(validations, customErrorsMsg);
   }
 
   validate = (values: any = {}) => {
-    const errors: any = {};
+    let errors: any = {};
+    let valid = true;
 
-    if (!values.email) {
-      errors.email = 'Este campo es requerido';
-    } else if (!emailRegex.test(values.email)) {
-      errors.email = 'Dirección de correo inválida';
-    }
-
-    if (!values.password) {
-      errors.password = 'Este campo es requerido';
-    }
-
-    if (!values.password_confirmation) {
-      errors.password_confirmation = 'Este campo es requerido';
-    } else if (values.password !== values.password_confirmation) {
-      errors.password_confirmation = 'Las contraseñas no coinciden';
+    if (!this.validator.validate(values, validationResults)) {
+      errors = flattenValidationResults(validationResults);
+      valid = false;
     }
 
     this.setState({ errors });
-
-    return !Object.keys(errors).length;
+    return valid;
   };
 
   setErrors = (data: any) => {
@@ -88,11 +112,7 @@ export default class PasswordResetComponent extends Component<Props, State> {
   doSubmit = (event: any) => {
     event.preventDefault();
     const { submitPasswordReset } = this.props;
-    const data = Object.fromEntries(
-      Array.from(event.target.elements)
-        .filter((item: any) => item.name)
-        .map((item: any) => [item.name, item.value]),
-    );
+    const data = mapFormElements(event.target.elements);
     if (this.validate(data)) {
       submitPasswordReset(data, this.setErrors);
     }

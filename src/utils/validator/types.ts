@@ -12,11 +12,11 @@ export type CustomMessageFormatter = (
 ) => string;
 
 export interface IValidation {
-  validate(logger: Logger): boolean;
+  validate(logger: Logger, values: TestValues): boolean;
 }
 
 export interface IValidationRule {
-  validate(value: any, result?: ResultEntry): boolean;
+  validate(value: any, values: TestValues, result?: ResultEntry): boolean;
 }
 
 export interface IGenericType<T> {
@@ -25,7 +25,7 @@ export interface IGenericType<T> {
   empty(): boolean;
   size(): number;
   valid(): boolean;
-  equal(other: IGenericType<T>): boolean;
+  equal(other: T): boolean;
 }
 
 export type ValidationEntry =
@@ -82,10 +82,10 @@ export const defaultErrorsMsg: ErrorMessages = {
     text: 'The field :field must contain a minimum of :min and a maximum of :max characters',
     number: 'The field :field should be a number between :min and :max',
     file: 'The field :field expects files count should be between :min and :max',
-    array: 'You can select a minimum of :min and a maximum of :max options',
+    array: 'You must select a minimum of :min and a maximum of :max options',
   },
   custom: 'The field :field does not match the custom validation',
-  equal: 'The field :field should be equal to :other',
+  equal: 'The field :field should be equal to the field :other',
   file: 'The field :field have one or several invalid properties (extension/size/type etc)',
   max: {
     text: 'The field :field must contain a maximum of :max characters',
