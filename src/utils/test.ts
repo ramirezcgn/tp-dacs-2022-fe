@@ -3,25 +3,27 @@ import type { Rules, TestValues, TestResults } from './validator';
 
 export const customErrorsMsg = {
   between: {
-    text: 'The field :field must contain a minium of :min and a maximum of :max characters',
+    text: 'The field :field must contain a minimum of :min and a maximum of :max characters',
     number: 'The field :field should be a number between :min and :max',
     file: 'The field :field expects files count should be between :min and :max',
-    array: 'You can select a minium of :min and a maximum of :max options',
+    array: 'You can select a minimum of :min and a maximum of :max options',
   },
+  custom: 'The field :field does not match the custom validation',
   equal: 'The field :field should be equal to :other',
   file: 'The field :field have one or several invalid properties (extension/size/type etc)',
   max: {
     text: 'The field :field must contain a maximum of :max characters',
-    number: 'The field :field should be a number less or equal than :max',
-    file: 'The field :field expects files count should be less or equal than :max',
+    number: 'The field :field should be a number less than or equal to :max',
+    file: 'The field :field expects files count should be less than or equal to :max',
     array: 'You can select a maximum of :max options',
   },
   min: {
-    text: 'The field :field must contain a minium of :min characters',
-    number: 'The field :field should be a number more or equal than :min',
-    file: 'The field :field expects files count should be more or equal than :min',
-    array: 'You should select a minium of :min options',
+    text: 'The field :field must contain a minimum of :min characters',
+    number: 'The field :field should be a number greater than or equal to :min',
+    file: 'The field :field expects files count should be greater than or equal to :min',
+    array: 'You should select a minimum of :min options',
   },
+  regex: 'The field :field does not match the required pattern',
   required: {
     array: 'You must select at least one option',
     default: 'The field :field is required',

@@ -1,5 +1,5 @@
 export type ResultEntry = {
-  name: string;
+  name?: string;
   error: string;
 };
 

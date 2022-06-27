@@ -76,7 +76,12 @@ export default class ValidationMessage {
         if (this.customMessageFormatter) {
           result.error = this.customMessageFormatter(rule, valid, data);
         } else {
-          result.error = this.messageFormatter(result.name, rule, valid, data);
+          result.error = this.messageFormatter(
+            result.name || '',
+            rule,
+            valid,
+            data,
+          );
         }
       }
       return valid;
