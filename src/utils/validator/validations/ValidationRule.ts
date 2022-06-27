@@ -6,9 +6,9 @@ import type { TypeKey, TypeItem } from '../valueTypes';
 import type {
   IValidationRule,
   ValidationEntry,
-  ResultEntry,
   CustomMessageFormatter,
   TestValues,
+  TestResults,
 } from '../types';
 
 type RestParams = [any?, any?];
@@ -64,8 +64,8 @@ export class ValidationRule implements IValidationRule {
     );
   }
 
-  validate(value: any, values: TestValues, result?: ResultEntry): boolean {
-    this.type.set(value);
-    return this.validations.validate(this.formatter.dump(result), values);
+  validate(key: string, values: TestValues, results?: TestResults): boolean {
+    this.type.set(values[key] as any);
+    return this.validations.validate(this.formatter.dump(key, results), values);
   }
 }

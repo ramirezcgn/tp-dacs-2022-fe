@@ -1,5 +1,9 @@
-import { defaultErrorsMsg, Logger, CustomMessageFormatter } from '../types';
-import type { ResultEntry } from '../types';
+import {
+  defaultErrorsMsg,
+  Logger,
+  CustomMessageFormatter,
+  TestResults,
+} from '../types';
 import type { TypeKey } from '../valueTypes';
 
 export default class ValidationMessage {
@@ -37,6 +41,7 @@ export default class ValidationMessage {
     rule: string,
     valid: boolean,
     data?: any,
+    results?: TestResults,
   ): string {
     if (valid) {
       return '';
@@ -56,6 +61,13 @@ export default class ValidationMessage {
       case 'equal': {
         regex = /:field|:other/gi;
         message = this.getMessage('equal');
+        if (
+          results &&
+          replaceFields.other in results &&
+          results[replaceFields.other].name
+        ) {
+          replaceFields.other = results[replaceFields.other].name;
+        }
         break;
       }
       case 'max': {
@@ -78,18 +90,25 @@ export default class ValidationMessage {
     return message;
   }
 
-  dump(result?: ResultEntry): Logger {
+  dump(key: string, results?: TestResults): Logger {
     return (rule: string, valid: boolean, data?: any) => {
+      const result = results && key in results ? results[key] : undefined;
       if (result) {
         if (typeof result.error !== 'undefined') {
           if (this.customMessageFormatter) {
-            result.error = this.customMessageFormatter(rule, valid, data);
+            result.error = this.customMessageFormatter(
+              rule,
+              valid,
+              data,
+              results,
+            );
           } else {
             result.error = this.messageFormatter(
               result.name || '',
               rule,
               valid,
               data,
+              results,
             );
           }
         }

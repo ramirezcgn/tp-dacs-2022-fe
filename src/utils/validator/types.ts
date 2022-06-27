@@ -9,6 +9,7 @@ export type CustomMessageFormatter = (
   rule: string,
   valid: boolean,
   data?: any,
+  results?: TestResults,
 ) => string;
 
 export interface IValidation {

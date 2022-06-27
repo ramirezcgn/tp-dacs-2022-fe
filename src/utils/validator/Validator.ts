@@ -19,15 +19,11 @@ export class Validator {
     );
   }
 
-  validate(values: TestValues, results: TestResults) {
-    return Object.entries(values).reduce((acc, [key, value]) => {
+  validate(values: TestValues, results?: TestResults) {
+    return Object.keys(values).reduce((acc, key) => {
       let valid = true;
       if (key in this.rules) {
-        valid = this.rules[key].validate(
-          value,
-          values,
-          key in results ? results[key] : undefined,
-        );
+        valid = this.rules[key].validate(key, values, results);
       }
       return acc && valid;
     }, true);
