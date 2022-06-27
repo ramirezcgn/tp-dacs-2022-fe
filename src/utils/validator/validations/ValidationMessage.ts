@@ -32,10 +32,10 @@ export default class ValidationMessage {
   messageFormatter(
     field: string,
     rule: string,
-    error: boolean,
+    valid: boolean,
     data?: any,
   ): string {
-    if (!error) {
+    if (valid) {
       return '';
     }
     let message = '';
@@ -65,21 +65,21 @@ export default class ValidationMessage {
         break;
     }
     if (message && regex) {
-      return message.replace(regex, (m) => replaceFields[m]);
+      return message.replace(regex, (m) => replaceFields[m.substring(1)]);
     }
     return message;
   }
 
   dump(result?: ResultEntry): Logger {
-    return (rule: string, error: boolean, data?: any) => {
+    return (rule: string, valid: boolean, data?: any) => {
       if (result) {
         if (this.customMessageFormatter) {
-          result.error = this.customMessageFormatter(rule, error, data);
+          result.error = this.customMessageFormatter(rule, valid, data);
         } else {
-          result.error = this.messageFormatter(result.name, rule, error, data);
+          result.error = this.messageFormatter(result.name, rule, valid, data);
         }
       }
-      return error;
+      return valid;
     };
   }
 }

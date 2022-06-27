@@ -24,7 +24,7 @@ export type TypeItem = ExtractTypeInstance<typeofTypes, any>;
 export class TypeFactory {
   static createInstance(type: TypeKey): TypeItem {
     if (!(type in typesMap)) {
-      throw Error('Invalid data type');
+      throw Error(`Invalid value type: "${type}"`);
     }
     return new typesMap[type]();
   }

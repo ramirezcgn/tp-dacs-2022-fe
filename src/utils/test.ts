@@ -40,10 +40,10 @@ const testValidations: Rules = {
   text: {
     type: 'text',
     validations: ['required'],
-    formatMessage: (rule, error, data) => {
-      console.log(rule, error, data);
+    /*formatMessage: (rule, valid, data) => {
+      console.log(rule, valid, data);
       return '';
-    },
+    },*/
   },
   minText: {
     type: 'text',
@@ -78,7 +78,7 @@ const testValidations: Rules = {
     validations: ['required', 'between:3:6'],
   },
   regex: {
-    type: 'string',
+    type: 'text',
     validations: ['regex:a+b'],
   },
 };

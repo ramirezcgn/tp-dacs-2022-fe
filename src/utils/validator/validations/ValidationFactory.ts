@@ -34,7 +34,7 @@ export class ValidationFactory {
     params: RestParams,
   ): ValidationItem {
     if (!(type in validationsMap)) {
-      throw Error('Invalid validation type');
+      throw Error(`Invalid validation type: "${type}"`);
     }
     return new validationsMap[type as validationKey](input, ...params);
   }
