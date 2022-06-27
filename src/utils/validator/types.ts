@@ -1,6 +1,7 @@
 export type ResultEntry = {
   name?: string;
-  error: string;
+  error?: string;
+  valid?: boolean;
 };
 
 export type Logger = (rule: string, valid: boolean, data?: any) => boolean;
@@ -31,8 +32,8 @@ export type ValidationEntry =
   | string[]
   | {
       between?: [number, number];
-      equal: string;
-      file: string;
+      equal?: string;
+      file?: string;
       max?: number;
       min?: number;
       regex?: string | RegExp;
@@ -68,7 +69,15 @@ export type ValidatorRules = {
   [key: string]: IValidationRule;
 };
 
-export const defaultErrorsMsg = {
+type ErrorMessagesEntry = {
+  [key: string]: string;
+};
+
+export type ErrorMessages = {
+  [key: string]: string | ErrorMessagesEntry;
+};
+
+export const defaultErrorsMsg: ErrorMessages = {
   between: {
     text: 'The field :field must contain a minimum of :min and a maximum of :max characters',
     number: 'The field :field should be a number between :min and :max',

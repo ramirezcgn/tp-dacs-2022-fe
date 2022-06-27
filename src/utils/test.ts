@@ -1,7 +1,12 @@
 import { Validator } from './validator';
-import type { Rules, TestValues, TestResults } from './validator';
+import type {
+  Rules,
+  TestValues,
+  TestResults,
+  ErrorMessages,
+} from './validator';
 
-export const customErrorsMsg = {
+export const customErrorsMsg: ErrorMessages = {
   between: {
     text: 'The field :field must contain a minimum of :min and a maximum of :max characters',
     number: 'The field :field should be a number between :min and :max',

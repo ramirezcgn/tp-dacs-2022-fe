@@ -73,15 +73,20 @@ export default class ValidationMessage {
   dump(result?: ResultEntry): Logger {
     return (rule: string, valid: boolean, data?: any) => {
       if (result) {
-        if (this.customMessageFormatter) {
-          result.error = this.customMessageFormatter(rule, valid, data);
-        } else {
-          result.error = this.messageFormatter(
-            result.name || '',
-            rule,
-            valid,
-            data,
-          );
+        if (typeof result.error !== 'undefined') {
+          if (this.customMessageFormatter) {
+            result.error = this.customMessageFormatter(rule, valid, data);
+          } else {
+            result.error = this.messageFormatter(
+              result.name || '',
+              rule,
+              valid,
+              data,
+            );
+          }
+        }
+        if (typeof result.valid !== 'undefined') {
+          result.valid = valid;
         }
       }
       return valid;
