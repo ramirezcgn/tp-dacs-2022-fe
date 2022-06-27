@@ -14,9 +14,11 @@ export default class MaxValidation extends Validation {
 
   validate(logger: Logger) {
     if (super.validate(logger)) {
-      return logger(MaxValidation.type, this.input.size() <= this.max, {
+      const valid = this.input.size() <= this.max;
+      logger(MaxValidation.type, valid, {
         max: this.max,
       });
+      return valid;
     }
     return false;
   }

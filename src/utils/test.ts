@@ -40,6 +40,10 @@ const testValidations: Rules = {
   text: {
     type: 'text',
     validations: ['required'],
+    formatMessage: (rule, error, data) => {
+      console.log(rule, error, data);
+      return '';
+    },
   },
   minText: {
     type: 'text',

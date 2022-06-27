@@ -6,7 +6,9 @@ export default class RequiredValidation extends Validation {
 
   validate(logger: Logger) {
     if (super.validate(logger)) {
-      return logger(RequiredValidation.type, !this.input.empty());
+      const valid = !this.input.empty();
+      logger(RequiredValidation.type, valid);
+      return valid;
     }
     return false;
   }

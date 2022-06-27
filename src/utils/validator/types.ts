@@ -4,6 +4,11 @@ export type ResultEntry = {
 };
 
 export type Logger = (rule: string, error: boolean, data?: any) => boolean;
+export type CustomMessageFormatter = (
+  rule: string,
+  error: boolean,
+  data?: any,
+) => string;
 
 export interface IValidation {
   validate(logger: Logger): boolean;
@@ -37,6 +42,7 @@ export type ValidationEntry =
 export type Rule = {
   type: string;
   validations: ValidationEntry;
+  formatMessage?: CustomMessageFormatter;
 };
 
 export type Rules = {

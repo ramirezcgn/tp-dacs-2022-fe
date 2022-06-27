@@ -1,21 +1,35 @@
 import { ValidationFactory, validationsMap } from './ValidationFactory';
 import CompositeValidation from './CompositeValidation';
-import ValidationLogger from './ValidationLogger';
+import ValidationMessage from './ValidationMessage';
 import { TypeFactory } from '../valueTypes';
 import type { TypeKey, TypeItem } from '../valueTypes';
-import type { IValidationRule, ValidationEntry, ResultEntry } from '../types';
+import type {
+  IValidationRule,
+  ValidationEntry,
+  ResultEntry,
+  CustomMessageFormatter,
+} from '../types';
 
 type RestParams = [any?, any?];
 
 export class ValidationRule implements IValidationRule {
   validations: CompositeValidation;
-  logger: ValidationLogger;
+  formatter: ValidationMessage;
   type: TypeItem;
 
-  constructor(type: string, entry: ValidationEntry, customErrorsMsg?: any) {
+  constructor(
+    type: string,
+    entry: ValidationEntry,
+    formatter?: CustomMessageFormatter,
+    customErrorsMsg?: any,
+  ) {
     this.type = TypeFactory.createInstance(type as TypeKey);
     this.validations = new CompositeValidation();
-    this.logger = new ValidationLogger(type as TypeKey, customErrorsMsg);
+    this.formatter = new ValidationMessage(
+      type as TypeKey,
+      formatter,
+      customErrorsMsg,
+    );
     const validations = Array.isArray(entry) ? entry : this.formatEntry(entry);
     validations.forEach((val) => {
       // eslint-disable-next-line prefer-const
@@ -50,6 +64,6 @@ export class ValidationRule implements IValidationRule {
 
   validate(value: any, result?: ResultEntry): boolean {
     this.type.set(value);
-    return this.validations.validate(this.logger.dump(result));
+    return this.validations.validate(this.formatter.dump(result));
   }
 }

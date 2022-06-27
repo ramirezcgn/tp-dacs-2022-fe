@@ -14,9 +14,11 @@ export default class MinValidation extends Validation {
 
   validate(logger: Logger) {
     if (super.validate(logger)) {
-      return logger(MinValidation.type, this.input.size() >= this.min, {
+      const valid = this.input.size() >= this.min;
+      logger(MinValidation.type, valid, {
         min: this.min,
       });
+      return valid;
     }
     return false;
   }

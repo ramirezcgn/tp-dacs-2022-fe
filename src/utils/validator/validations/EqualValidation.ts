@@ -14,13 +14,11 @@ export default class EqualValidation extends Validation {
 
   validate(logger: Logger) {
     if (super.validate(logger)) {
-      return logger(
-        EqualValidation.type,
-        this.other && this.input.equal(this.other),
-        {
-          other: this.other.get(),
-        },
-      );
+      const valid = this.other && this.input.equal(this.other);
+      logger(EqualValidation.type, valid, {
+        other: this.other.get(),
+      });
+      return valid;
     }
     return false;
   }

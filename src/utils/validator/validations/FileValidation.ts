@@ -15,7 +15,9 @@ export default class FileValidation extends Validation {
 
   validate(logger: Logger) {
     if (super.validate(logger)) {
-      return logger(FileValidation.type, this.validateFileProps());
+      const valid = this.validateFileProps();
+      logger(FileValidation.type, valid);
+      return valid;
     }
     return false;
   }

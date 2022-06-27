@@ -23,7 +23,9 @@ export default class CustomValidation extends Validation {
 
   validate(logger: Logger) {
     if (super.validate(logger)) {
-      return logger(CustomValidation.type, this.callback(this.input.get()));
+      const valid = this.callback(this.input.get());
+      logger(CustomValidation.type, valid);
+      return valid;
     }
     return false;
   }

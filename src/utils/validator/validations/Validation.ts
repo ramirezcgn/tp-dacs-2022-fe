@@ -11,6 +11,8 @@ export abstract class Validation implements IValidation {
   }
 
   validate(logger: Logger): boolean {
-    return logger(Validation.type, this.input.valid());
+    const valid = this.input.valid();
+    logger(Validation.type, valid);
+    return valid;
   }
 }

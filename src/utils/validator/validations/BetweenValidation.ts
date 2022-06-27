@@ -16,14 +16,13 @@ export default class BetweenValidation extends Validation {
 
   validate(logger: Logger) {
     if (super.validate(logger)) {
-      return logger(
-        BetweenValidation.type,
-        this.input.size() >= this.min && this.input.size() <= this.max,
-        {
-          min: this.min,
-          max: this.max,
-        },
-      );
+      const valid =
+        this.input.size() >= this.min && this.input.size() <= this.max;
+      logger(BetweenValidation.type, valid, {
+        min: this.min,
+        max: this.max,
+      });
+      return valid;
     }
     return false;
   }

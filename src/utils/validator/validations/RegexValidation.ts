@@ -14,10 +14,9 @@ export default class RegexValidation extends Validation {
 
   validate(logger: Logger) {
     if (super.validate(logger)) {
-      return logger(
-        RegexValidation.type,
-        this.regex.test(this.input.get()?.toString() || ''),
-      );
+      const valid = this.regex.test(this.input.get()?.toString() || '');
+      logger(RegexValidation.type, valid);
+      return valid;
     }
     return false;
   }

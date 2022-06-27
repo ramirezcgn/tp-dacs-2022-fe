@@ -1,20 +1,26 @@
-import { defaultErrorsMsg } from '../types';
+import { defaultErrorsMsg, Logger, CustomMessageFormatter } from '../types';
 import type { ResultEntry } from '../types';
 import type { TypeKey } from '../valueTypes';
 
-export default class ValidationLogger {
+export default class ValidationMessage {
   type: TypeKey;
   errorsList: any;
+  customMessageFormatter?: CustomMessageFormatter;
 
-  constructor(type: TypeKey, customErrorMsg?: any) {
+  constructor(
+    type: TypeKey,
+    customMessageFormatter?: CustomMessageFormatter,
+    customErrorMsg?: any,
+  ) {
     this.type = type;
     this.errorsList = {
       ...defaultErrorsMsg,
       ...(customErrorMsg || {}),
     };
+    this.customMessageFormatter = customMessageFormatter;
   }
 
-  getMessage(rule) {
+  getMessage(rule: string): string {
     if (this.type in this.errorsList[rule]) {
       return this.errorsList[rule][this.type];
     } else if ('default' in this.errorsList[rule]) {
@@ -23,7 +29,12 @@ export default class ValidationLogger {
     return 'Unknown Error';
   }
 
-  format(field: string, rule: string, error: boolean, data?: any): string {
+  messageFormatter(
+    field: string,
+    rule: string,
+    error: boolean,
+    data?: any,
+  ): string {
     if (!error) {
       return '';
     }
@@ -59,10 +70,14 @@ export default class ValidationLogger {
     return message;
   }
 
-  dump(result?: ResultEntry) {
+  dump(result?: ResultEntry): Logger {
     return (rule: string, error: boolean, data?: any) => {
       if (result) {
-        result.error = this.format(result.name, rule, error, data);
+        if (this.customMessageFormatter) {
+          result.error = this.customMessageFormatter(rule, error, data);
+        } else {
+          result.error = this.messageFormatter(result.name, rule, error, data);
+        }
       }
       return error;
     };
