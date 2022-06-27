@@ -5,10 +5,10 @@ import { TypeFactory } from '../valueTypes';
 import type { TypeKey, TypeItem } from '../valueTypes';
 import type {
   IValidationRule,
-  ValidationEntry,
-  CustomMessageFormatter,
   TestValues,
   TestResults,
+  ValidatorRules,
+  Rule,
 } from '../types';
 
 type RestParams = [any?, any?];
@@ -17,26 +17,30 @@ export class ValidationRule implements IValidationRule {
   validations: CompositeValidation;
   formatter: ValidationMessage;
   type: TypeItem;
+  rules: ValidatorRules;
+  name: string;
 
-  constructor(
-    type: string,
-    entry: ValidationEntry,
-    formatter?: CustomMessageFormatter,
-    customErrorsMsg?: any,
-  ) {
+  constructor(rules: ValidatorRules, rule: Rule, customErrorsMsg?: any) {
+    const { name, type, validations, formatMessage } = rule;
+    this.rules = rules;
+    this.name = name;
     this.type = TypeFactory.createInstance(type as TypeKey);
     this.validations = new CompositeValidation();
     this.formatter = new ValidationMessage(
+      name,
+      rules,
       type as TypeKey,
-      formatter,
+      formatMessage,
       customErrorsMsg,
     );
-    const validations = Array.isArray(entry) ? entry : this.formatEntry(entry);
-    validations.forEach((val) => {
-      const [rule, ...params] = val.split(':');
-      if (rule in validationsMap) {
+    const validationsList = Array.isArray(validations)
+      ? validations
+      : this.formatEntry(validations);
+    validationsList.forEach((val) => {
+      const [ruleName, ...params] = val.split(':');
+      if (ruleName in validationsMap) {
         const validation = ValidationFactory.createInstance(
-          rule,
+          ruleName,
           this.type,
           this.formatParams(params),
         );

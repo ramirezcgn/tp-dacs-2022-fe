@@ -3,25 +3,32 @@ import {
   Logger,
   CustomMessageFormatter,
   TestResults,
+  ValidatorRules,
 } from '../types';
 import type { TypeKey } from '../valueTypes';
 
 export default class ValidationMessage {
+  name: string;
   type: TypeKey;
   errorsList: any;
   customMessageFormatter?: CustomMessageFormatter;
+  rules: ValidatorRules;
 
   constructor(
+    name: string,
+    rules: ValidatorRules,
     type: TypeKey,
     customMessageFormatter?: CustomMessageFormatter,
     customErrorMsg?: any,
   ) {
+    this.name = name;
     this.type = type;
     this.errorsList = {
       ...defaultErrorsMsg,
       ...(customErrorMsg || {}),
     };
     this.customMessageFormatter = customMessageFormatter;
+    this.rules = rules;
   }
 
   getMessage(rule: string): string {
@@ -36,20 +43,14 @@ export default class ValidationMessage {
     return 'Unknown Error';
   }
 
-  messageFormatter(
-    field: string,
-    rule: string,
-    valid: boolean,
-    data?: any,
-    results?: TestResults,
-  ): string {
+  messageFormatter(rule: string, valid: boolean, data?: any): string {
     if (valid) {
       return '';
     }
     let message = '';
     let regex = /:field/gi;
     const replaceFields = {
-      field,
+      field: this.name,
       ...(data || {}),
     };
     switch (rule) {
@@ -62,11 +63,10 @@ export default class ValidationMessage {
         regex = /:field|:other/gi;
         message = this.getMessage('equal');
         if (
-          results &&
-          replaceFields.other in results &&
-          results[replaceFields.other].name
+          replaceFields.other in this.rules &&
+          this.rules[replaceFields.other].name
         ) {
-          replaceFields.other = results[replaceFields.other].name;
+          replaceFields.other = this.rules[replaceFields.other].name;
         }
         break;
       }
@@ -92,29 +92,10 @@ export default class ValidationMessage {
 
   dump(key: string, results?: TestResults): Logger {
     return (rule: string, valid: boolean, data?: any) => {
-      const result = results && key in results ? results[key] : undefined;
-      if (result) {
-        if (typeof result.error !== 'undefined') {
-          if (this.customMessageFormatter) {
-            result.error = this.customMessageFormatter(
-              rule,
-              valid,
-              data,
-              results,
-            );
-          } else {
-            result.error = this.messageFormatter(
-              result.name || '',
-              rule,
-              valid,
-              data,
-              results,
-            );
-          }
-        }
-        if (typeof result.valid !== 'undefined') {
-          result.valid = valid;
-        }
+      if (results && key in results) {
+        results[key] = this.customMessageFormatter
+          ? this.customMessageFormatter(rule, valid, data)
+          : this.messageFormatter(rule, valid, data);
       }
       return valid;
     };

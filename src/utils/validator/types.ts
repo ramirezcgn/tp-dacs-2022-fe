@@ -1,15 +1,8 @@
-export type ResultEntry = {
-  name?: string;
-  error?: string;
-  valid?: boolean;
-};
-
 export type Logger = (rule: string, valid: boolean, data?: any) => boolean;
 export type CustomMessageFormatter = (
   rule: string,
   valid: boolean,
   data?: any,
-  results?: TestResults,
 ) => string;
 
 export interface IValidation {
@@ -17,7 +10,8 @@ export interface IValidation {
 }
 
 export interface IValidationRule {
-  validate(value: any, values: TestValues, result?: ResultEntry): boolean;
+  name: string;
+  validate(value: any, values: TestValues, results?: TestResults): boolean;
 }
 
 export interface IGenericType<T> {
@@ -42,6 +36,7 @@ export type ValidationEntry =
     };
 
 export type Rule = {
+  name: string;
   type: string;
   validations: ValidationEntry;
   formatMessage?: CustomMessageFormatter;
@@ -63,7 +58,7 @@ export type TestValues = {
 };
 
 export type TestResults = {
-  [key: string]: ResultEntry;
+  [key: string]: string;
 };
 
 export type ValidatorRules = {
