@@ -3,7 +3,7 @@ import CompositeValidation from './CompositeValidation';
 import ValidationLogger from './ValidationLogger';
 import { TypeFactory } from '../valueTypes';
 import type { TypeKey, TypeItem } from '../valueTypes';
-import type { IValidationRule, ResultEntry } from '../types';
+import type { IValidationRule, ValidationEntry, ResultEntry } from '../types';
 
 type RestParams = [any?, any?];
 
@@ -12,10 +12,11 @@ export class ValidationRule implements IValidationRule {
   logger: ValidationLogger;
   type: TypeItem;
 
-  constructor(type: string, validations: string[]) {
+  constructor(type: string, entry: ValidationEntry, customErrorsMsg?: any) {
     this.type = TypeFactory.createInstance(type as TypeKey);
     this.validations = new CompositeValidation();
-    this.logger = new ValidationLogger(type as TypeKey);
+    this.logger = new ValidationLogger(type as TypeKey, customErrorsMsg);
+    const validations = Array.isArray(entry) ? entry : this.formatEntry(entry);
     validations.forEach((val) => {
       // eslint-disable-next-line prefer-const
       let [rule, ...params] = val.split(':');
@@ -30,6 +31,12 @@ export class ValidationRule implements IValidationRule {
           this.validations.add(validation);
         }
       }
+    });
+  }
+
+  formatEntry(entry) {
+    return Object.entries(entry).map(([key, value]) => {
+      return `${key}:${(Array.isArray(value) ? value : [value]).join(':')}`;
     });
   }
 

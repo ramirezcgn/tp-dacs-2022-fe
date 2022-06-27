@@ -1,17 +1,21 @@
 import BetweenValidation from './BetweenValidation';
+import CustomValidation from './CustomValidation';
 import EqualValidation from './EqualValidation';
 import FileValidation from './FileValidation';
 import MaxValidation from './MaxValidation';
 import MinValidation from './MinValidation';
+import RegexValidation from './RegexValidation';
 import RequiredValidation from './RequiredValidation';
 import type { TypeItem } from '../valueTypes';
 
 export const validationsMap = {
   [BetweenValidation.type]: BetweenValidation,
+  [CustomValidation.type]: CustomValidation,
   [EqualValidation.type]: EqualValidation,
   [FileValidation.type]: FileValidation,
   [MaxValidation.type]: MaxValidation,
   [MinValidation.type]: MinValidation,
+  [RegexValidation.type]: RegexValidation,
   [RequiredValidation.type]: RequiredValidation,
 };
 

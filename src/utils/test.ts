@@ -1,121 +1,40 @@
-/*
-export type FormParams = {
-  [key: string]: any;
-};
-
-export type Validation = {
-  type: string;
-  error: string;
-};
-
-export type ItemError = {
-  title: string;
-  type: string;
-  error: string;
-  validations: string[];
-};
-
-export type FormErrors = {
-  [key: string]: ItemError;
-};
-
-export type Validations = {
-  [key: string]: ItemError;
-};
-
-export const validate = (
-  items: FormParams,
-  errors: FormErrors,
-  reset?: boolean,
-) => {
-  const currentErrors = { ...errors };
-  Object.entries(currentErrors).forEach(([name, rule]) => {
-    const item = items[name];
-    if (reset) {
-      item.error = '';
-      return;
-    }
-    switch (rule.type) {
-      case 'array':
-        if (!items[name].length) {
-          item.error = `${rule.title} is required`;
-        } else {
-          item.error = '';
-        }
-        break;
-      case 'email':
-      case 'username':
-        if (!items[name]) {
-          current.error = `${current.title} is required`;
-        } else if (
-          !emailRegex.test(items[name]) ||
-          !usernameRegex.test(items[name])
-        ) {
-          current.error = `${current.title} is invalid`;
-        } else {
-          current.error = '';
-        }
-        break;
-      default:
-        if (!items[name]) {
-          current.error = `${current.title} is required`;
-        } else {
-          current.error = '';
-        }
-        break;
-    }
-  });
-  return Object.values(currentErrors).every(({ error }) => !error);
-};
-
-const initialErrors: Validations = {
-  firstName: {
-    title: 'First name',
-    type: 'text',
-    validations: [
-      'required',
-      'min: 5',
-      'max: 9',
-      'regex: ',
-      'equal: ',
-    ],
-  },
-  lastName: {
-    title: 'Last name',
-    type: 'text',
-    validations: [{
-      rule: 'minLength',
-      value: 3,
-      error:
-    }],
-  },
-  email: {
-    title: 'Email Address',
-    type: 'email',
-    validations: [{
-      type: string;
-      error: string;
-    }],
-  },
-  euResident: {
-    title: 'EU Resident',
-    type: 'text',
-    validations: [
-
-    ],
-  },
-  fieldName: {
-    title: 'At least one checkbox selected',
-    type: 'array',
-    validations: [
-
-    ],
-  },
-};
-*/
-
 import { Validator } from './validator';
 import type { Rules, TestValues, TestResults } from './validator';
+
+export const customErrorsMsg = {
+  between: {
+    text: 'The field :field must contain a minium of :min and a maximum of :max characters',
+    number: 'The field :field should be a number between :min and :max',
+    file: 'The field :field expects files count should be between :min and :max',
+    array: 'You can select a minium of :min and a maximum of :max options',
+  },
+  equal: 'The field :field should be equal to :other',
+  file: 'The field :field have one or several invalid properties (extension/size/type etc)',
+  max: {
+    text: 'The field :field must contain a maximum of :max characters',
+    number: 'The field :field should be a number less or equal than :max',
+    file: 'The field :field expects files count should be less or equal than :max',
+    array: 'You can select a maximum of :max options',
+  },
+  min: {
+    text: 'The field :field must contain a minium of :min characters',
+    number: 'The field :field should be a number more or equal than :min',
+    file: 'The field :field expects files count should be more or equal than :min',
+    array: 'You should select a minium of :min options',
+  },
+  required: {
+    array: 'You must select at least one option',
+    default: 'The field :field is required',
+  },
+  valid: {
+    email: 'The field :field has an invalid email format',
+    password:
+      'The field :field must contain minimum eight characters, at least one letter and one number',
+    username: 'The field :field has an invalid username format',
+    number: 'The field :field should be a number',
+    default: 'The field :field is invalid',
+  },
+};
 
 const testValidations: Rules = {
   text: {
@@ -153,6 +72,10 @@ const testValidations: Rules = {
   betweenNumber: {
     type: 'number',
     validations: ['required', 'between:3:6'],
+  },
+  regex: {
+    type: 'string',
+    validations: ['regex:a+b'],
   },
 };
 
@@ -207,5 +130,5 @@ const testValues: TestValues = {
   betweenNumber: '11',
 };
 
-const v = new Validator(testValidations);
+const v = new Validator(testValidations, customErrorsMsg);
 console.log(v.validate(testValues, results), results);

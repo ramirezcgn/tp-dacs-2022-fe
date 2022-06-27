@@ -4,11 +4,11 @@ import type { ValidatorRules, Rules, TestValues, TestResults } from './types';
 export class Validator {
   rules: ValidatorRules = {};
 
-  constructor(rules: Rules) {
+  constructor(rules: Rules, customErrorsMsg?: any) {
     this.rules = Object.entries(rules).reduce(
       (acc, [key, { type, validations }]) => ({
         ...acc,
-        [key]: new ValidationRule(type, validations),
+        [key]: new ValidationRule(type, validations, customErrorsMsg),
       }),
       {},
     );
