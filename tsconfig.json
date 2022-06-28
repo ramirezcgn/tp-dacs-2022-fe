@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "baseUrl": "src",
     "target": "es5",
     "lib": [
       "dom",
@@ -22,10 +21,12 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "baseUrl": "./src",
     "paths": {
       "_constants": ["constants"],
       "_constants/*": ["constants/*"],
-    }
+    },
+    "rootDirs": ["./src"]
   },
   "exclude": [
     "node_modules"
@@ -34,6 +35,5 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
-  "rootDirs": ["./src"]
+  ]
 }

@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { sessionActions } from '_constants';
+import { apiHost, sessionActions } from '_constants';
 
 export const getCurrentUserInfo = () => async (dispatch: Function) => {
-  const response = await axios.get('/api/users/me');
+  const response = await axios.get(apiHost + '/api/users/me');
 
   dispatch({
     type: sessionActions.SET_CURRENT_USER_INFO,
@@ -13,7 +13,7 @@ export const getCurrentUserInfo = () => async (dispatch: Function) => {
 };
 
 export const logIn = (loginDetails: any) => async (dispatch: Function) => {
-  const response = await axios.post('/api/login', loginDetails);
+  const response = await axios.post(apiHost + '/api/login', loginDetails);
 
   dispatch({
     type: sessionActions.SET_CURRENT_USER_INFO,
@@ -24,7 +24,7 @@ export const logIn = (loginDetails: any) => async (dispatch: Function) => {
 };
 
 export const signUp = (signUpDetails: any) => async (dispatch: Function) => {
-  const response = await axios.post('/api/auth/signup', signUpDetails);
+  const response = await axios.post(apiHost + '/api/signup', signUpDetails);
   if (response) {
     dispatch({
       type: sessionActions.SET_CURRENT_USER_INFO,
@@ -35,7 +35,7 @@ export const signUp = (signUpDetails: any) => async (dispatch: Function) => {
 };
 
 export const logOut = () => async (dispatch: Function) => {
-  await axios.get('/api/logout');
+  await axios.get(apiHost + '/api/logout');
 
   dispatch({
     type: sessionActions.LOGOUT,
@@ -43,7 +43,7 @@ export const logOut = () => async (dispatch: Function) => {
 };
 
 export const forgotPassword = (values: any) => async (dispatch: Function) => {
-  await axios.post('/api/forgot-password', values);
+  await axios.post(apiHost + '/api/forgot-password', values);
 
   dispatch({
     type: sessionActions.FORGOT_PASSWORD,
@@ -52,7 +52,7 @@ export const forgotPassword = (values: any) => async (dispatch: Function) => {
 
 export const passwordReset =
   (values: any, token: string) => async (dispatch: Function) => {
-    await axios.post('/api/reset-password', {
+    await axios.post(apiHost + '/api/reset-password', {
       ...values,
       token,
     });

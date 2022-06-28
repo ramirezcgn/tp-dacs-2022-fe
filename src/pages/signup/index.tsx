@@ -25,7 +25,7 @@ type Props = {
 
 type State = {
   errors: {
-    name: string;
+    username: string;
     email: string;
     password: string;
     password_confirmation: string;
@@ -69,7 +69,7 @@ const mapDispatchToProps = (dispatch: Function, { router }: any) => ({
       await dispatch(signUp(signUpDetails));
       router.push('/');
     } catch (error: any) {
-      setErrors(error.response.data);
+      setErrors(error.response?.data);
     }
   },
 });
@@ -86,7 +86,7 @@ export default class SignUpPage extends Component<Props, State> {
     super(props);
     this.state = {
       errors: {
-        name: '',
+        username: '',
         email: '',
         password: '',
         password_confirmation: '',
@@ -107,38 +107,11 @@ export default class SignUpPage extends Component<Props, State> {
 
     this.setState({ errors });
     return valid;
-    /*const errors: any = {};
-
-    if (!values.name) {
-      errors.name = 'Este campo es requerido';
-    } else if (!usernameRegex.test(values.name)) {
-      errors.name = 'Nombre de usuario inválido';
-    }
-
-    if (!values.email) {
-      errors.email = 'Este campo es requerido';
-    } else if (!emailRegex.test(values.email)) {
-      errors.email = 'Dirección de correo inválida';
-    }
-
-    if (!values.password) {
-      errors.password = 'Este campo es requerido';
-    }
-
-    if (!values.password_confirmation) {
-      errors.password_confirmation = 'Este campo es requerido';
-    } else if (values.password !== values.password_confirmation) {
-      errors.password_confirmation = 'Las contraseñas no coinciden';
-    }
-
-    this.setState({ errors });
-
-    return !Object.keys(errors).length;*/
   };
 
   setErrors = (response: any) => {
     let newErrors: any = {};
-    const { errors, message } = response;
+    const { errors, message } = response || {};
     if (errors) {
       newErrors = errors;
     } else {
@@ -161,9 +134,14 @@ export default class SignUpPage extends Component<Props, State> {
     return (
       <Form onSubmit={this.doSubmit}>
         <FormGroup>
-          <Label for="name">Nombre de Usuario</Label>
-          <Input type="text" name="name" id="name" invalid={!!errors.name} />
-          {errors.name && <FormFeedback>{errors.name}</FormFeedback>}
+          <Label for="username">Nombre de Usuario</Label>
+          <Input
+            type="text"
+            name="username"
+            id="username"
+            invalid={!!errors.username}
+          />
+          {errors.username && <FormFeedback>{errors.username}</FormFeedback>}
         </FormGroup>
         <FormGroup>
           <Label for="email">Dirección de Email</Label>

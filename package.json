@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "npm run open-browser && next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint src --max-warnings=0",
     "lint-fix": "eslint src --fix",
     "typecheck": "tsc --project tsconfig.json --noEmit",
     "generate": "npm run plop --plopfile ./generators/plopfile.js",
+    "open-browser": "start http://localhost:3000",
     "prepare": "husky install"
   },
   "husky": {
