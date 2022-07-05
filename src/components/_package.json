@@ -1,0 +1,13 @@
+{
+    "id": 1,
+    "name": "paquete 1",
+    "description": "semana en mar del plata",
+    "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/07/4e/a5/36/playa-varese.jpg?w=300&h=300&s=1",
+    "price": 1000,
+    "days": 7,
+    "date": "2022-06-15T00:00:00.000Z",
+    "validUntil": null,
+    "createdAt": "2022-07-05T11:09:44.758Z",
+    "updatedAt": "2022-07-05T11:09:44.758Z",
+    "InsuranceId": null
+}
