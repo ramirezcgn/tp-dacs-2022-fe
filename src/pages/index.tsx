@@ -1,10 +1,20 @@
-import { Main } from 'components';
-import styles from './index.module.scss';
+import React from 'react';
+import Navbar from '../components/Navbar/Navbar';
+import Footer from '../components/Footer/Footer'
 
-export default function Home() {
-  return (
-    <div className={styles.saraza}>
-      <Main />
-    </div>
-  );
-}
+const HomePage = () => {
+  return(
+  <div>
+    <header>
+      <Navbar/>
+    </header>
+    <main>
+      <h1>Pagina web, Inicio</h1>
+    </main>
+    <Footer/>
+  </div>
+  )
+};
+
+export default HomePage
+
