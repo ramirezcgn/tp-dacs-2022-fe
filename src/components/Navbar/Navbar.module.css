@@ -1,0 +1,20 @@
+.nav{
+    background-color: blue;
+}
+
+.li{
+    list-style: none;
+}
+
+.nav_button{
+    display: inline-block;
+    background-color: red;
+    padding: 0px 4px 0px 4px;
+    margin: 0px 4px 0px 4px;
+}
+
+.nav_button a{
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+}

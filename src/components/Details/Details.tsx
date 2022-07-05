@@ -1,5 +1,5 @@
 import React from 'react';
-import paquete from './_package.json'
+import paquete from '../_package.json'
 import styles from './Details.module.css'
 
 const DetailPackage = ({paq}) => {

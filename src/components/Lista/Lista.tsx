@@ -1,7 +1,6 @@
 import React from 'react';
-import paq from './packages.json'
-import Navbar from './Navbar';
-import ItemPackage from './Package';
+import paq from '../packages.json'
+import ItemPackage from '../Package/Package';
 import styles from './lista.module.css';
 
 const ListPackages = () => {
