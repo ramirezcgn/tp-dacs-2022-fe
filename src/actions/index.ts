@@ -7,3 +7,8 @@ export * from './passenger';
 export * from './payment';
 export * from './paymentplan';
 export * from './ticket';
+export * from './accomodation';
+export * from './customer';
+export * from './insurance';
+export * from './policy';
+export * from './transport';
