@@ -1,0 +1,28 @@
+.nav {
+  background-color: silver;
+  width: 805px;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav_li_1 {
+  display: inline-block;
+  font-size: 20px;
+  padding: 0px 60px 0px 60px;
+}
+.nav_li_2 {
+  display: inline-block;
+  font-size: 20px;
+  padding: 0px 70px 0px 70px;
+}
+.nav_li_3 {
+  display: inline-block;
+  font-size: 20px;
+  padding: 0px 20px 0px 80px;
+}
+.nav_li_4 {
+  display: inline-block;
+  font-size: 20px;
+  padding: 0px 0px 0px 75px;
+}

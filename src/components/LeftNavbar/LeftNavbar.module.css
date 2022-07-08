@@ -1,0 +1,75 @@
+/* barra izquierda */
+.navcontainer {
+  position: fixed;
+  width: 200px;
+  height: 100%;
+  background-color: #D5CCCA;
+  box-shadow: 3px 0px 6px 0px rgba(246, 246, 246, 0.75);
+}
+
+.wrapper{
+   padding:10px;
+   z-index: 1;
+}
+.logo {
+  padding: 10px;
+  padding-left: 20px;
+  text-align: left;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.wrapper >ul{
+  margin-top:20px;
+   text-align: left;
+   padding-left: 10px;
+   display: flex;
+   gap:25px;
+   flex-direction: column;
+   font-size: 18px;
+   font-weight: bold;
+}
+
+.wrapper>ul>li{
+  list-style: none;
+  font-size: 20px;
+  text-decoration: none;
+  opacity: .6;
+}
+.wrapper>ul>li:active{
+  color: #000;
+}
+
+.wrapper>ul>li>a:hover{
+  color: darkgoldenrod;
+  font-size: 22px;
+  transition: 0.2s;
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+.navcontainer{
+  width: 70px;
+}
+.logo>h2{
+  opacity: 0;
+}
+.logo{
+  /*background: url('../public/img/logo.png');*/
+  width: 40px;
+  height: 40px;
+  padding:10px;
+  margin: 10px;
+}
+.wrapper>ul{
+  gap:5px;
+}
+.wrapper>ul>li:hover{
+color:red;
+}
+.wrapper>ul>li>a{
+  opacity: 0;
+}
+
+}

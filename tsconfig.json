@@ -24,7 +24,7 @@
     "baseUrl": "./src",
     "paths": {
       "_constants": ["constants"],
-      "_constants/*": ["constants/*"],
+      "_constants/*": ["constants/*"]
     },
     "rootDirs": ["./src"]
   },

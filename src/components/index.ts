@@ -7,3 +7,5 @@ export * from './Paginator/Paginator';
 export * from './Portal/Portal';
 export * from './PortalContainer/PortalContainer';
 export * from './TableWrapper/TableWrapper';
+export * from './Carousel/Carousel';
+export * from './Card/Card';

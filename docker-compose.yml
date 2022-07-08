@@ -1,0 +1,8 @@
+version: "3.8"
+services:
+  dacs_gateway:
+    image: "kyberneees/rproxy:latest"
+    ports:
+      - "8080:8080"
+  dacs_fe:
+    build: .
