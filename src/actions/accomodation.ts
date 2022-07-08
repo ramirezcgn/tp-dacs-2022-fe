@@ -55,4 +55,3 @@ export const updateAccomodation = (id, data) => async (dispatch: Function) => {
 
   return response.data.accomodation;
 };
-

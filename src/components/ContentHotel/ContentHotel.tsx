@@ -1,8 +1,13 @@
 import React from 'react';
 import styles from 'styles/global.module.css';
-import image1 from '/public/img/image1.jpg';
-import Image from 'next/image';
+import ocean from '/public/img/ocean.jpg';
+import greengarden from '/public/img/greengarden.jpg';
+import museo2 from '/public/img/museo2.jpg';
+import safilia from '/public/img/safilia.jpg';
+import plaza from '/public/img/plaza.jpg';
+import hilton from '/public/img/hilton.jpg';
 import Link from 'next/link';
+import ImageWithModal from './components/ImageWithModal';
 
 function ContentHotel() {
   return (
@@ -41,142 +46,179 @@ function ContentHotel() {
           </div>
         </div>
       </div>
-
       <div>
-        <div>
-          <div className="grid">
-            <a className="card">
-              <h3>Hotel Example</h3>
-              <p>Address: Av Libertador 9090</p>
-              <p>Estrellas: 4</p>
-              <p>Disponible: si</p>
-              <Image
-                src={image1}
-                alt="Picture of the author"
-                width={200}
-                height={200}
-              />
-            </a>
-          </div>
-          <div className="grid">
-            <a className="card">
-              <h3>Hotel Example</h3>
-              <p>Address: Av Libertador 9090</p>
-              <p>Estrellas: 4</p>
-              <p>Disponible: si</p>
-              <Image
-                src={image1}
-                alt="Picture of the author"
-                width={200}
-                height={200}
-              />
-            </a>
-          </div>
-
-          <div className="grid">
-            <a className="card">
-              <h3>Hotel Example</h3>
-              <p>Address: Av Libertador 9090</p>
-              <p>Estrellas: 4</p>
-              <p>Disponible: si</p>
-              <Image
-                src={image1}
-                alt="Picture of the author"
-                width={200}
-                height={200}
-              />
-            </a>
-          </div>
-
-          <div className="grid">
-            <a className="card">
-              <h3>Hotel Example</h3>
-              <p>Address: Av Libertador 9090</p>
-              <p>Estrellas: 4</p>
-              <p>Disponible: si</p>
-              <Image
-                src={image1}
-                alt="Picture of the author"
-                width={200}
-                height={200}
-              />
-            </a>
-          </div>
-
-          <div className="grid">
-            <a className="card">
-              <h3>Hotel Example</h3>
-              <p>Address: Av Libertador 9090</p>
-              <p>Estrellas: 4</p>
-              <p>Disponible: si</p>
-              <Image
-                src={image1}
-                alt="Picture of the author"
-                width={200}
-                height={200}
-              />
-            </a>
-          </div>
-
-          <div className="grid">
-            <a className="card">
-              <h3>Hotel Example</h3>
-              <p>Address: Av Libertador 9090</p>
-              <p>Estrellas: 4</p>
-              <p>Disponible: si</p>
-              <Image
-                src={image1}
-                alt="Picture of the author"
-                width={200}
-                height={200}
-              />
-            </a>
-          </div>
-        </div>
-        <style jsx>
-          {`
-        .grid {
-          display: Inline-block;
-          align-items: left;
-          justify-content: left;
-          flex-wrap: nowrap;
-          width: 300px;
-			heigth: 300 px;
-          margin-top: 3rem;
-        }
-        .card {
-          margin: 1rem;
-			display: Inline-block;
-          flex-basis: 45%;
-          padding: 1.5rem;
-          text-align: left;
-          color: inherit;
-          text-decoration: none;
-          border: 1px solid #eaeaea;
-          border-radius: 10px;
-          transition: color 0.15s ease, border-color 0.15s ease;
-        }
-        .card:hover,
-        .card:focus,
-        .card:active {
-          color: #0070f3;
-          border-color: #0070f3;
-        }
-        .card h3 {
-          margin: 0 0 1rem 0;
-          font-size: 1.5rem;
-        }
-        .card p {
-          margin: 0;
-          font-size: 1.25rem;
-          line-height: 1.5;
-        }
-		.card img{
-		widht="300px";
-		height="300px";
-		}
-      `}
-        </style>
+        <table>
+          <tbody>
+            <tr>
+              <th className={styles.tabs2}>HOTEL HILTON DOHA</th>
+              <th className={styles.tabs2}>GOLDEN OCEAN HOTEL</th>
+              <th className={styles.tabs2}>OUTLANDING APART</th>
+            </tr>
+            <tr>
+              <td>
+                <ImageWithModal src={hilton} alt="Picture of the author" />
+              </td>
+              <td>
+                <ImageWithModal src={ocean} alt="Picture of the author" />
+              </td>
+              <td>
+                <ImageWithModal src={museo2} alt="Picture of the author" />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <b>Ubicacion:</b> Diplomatic Area, Dafna, Doha
+              </td>
+              <td>
+                <b>Ubicacion:</b> Al Meena St. Doha, Qatar
+              </td>
+              <td>
+                <b>Ubicacion:</b> localidad de Doha
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <b>Disponibile:</b> si
+              </td>
+              <td>
+                <b>Disponibile:</b> si
+              </td>
+              <td>
+                <b>Disponibile:</b> no
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <b>Estrellas:</b> 5
+              </td>
+              <td>
+                <b>Estrellas:</b> 5
+              </td>
+              <td>
+                <b>Estrellas:</b> 4
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <b>Precio:</b> $35000
+              </td>
+              <td>
+                <b>Precio:</b> $4400
+              </td>
+              <td>
+                <b>Precio:</b> $3500
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <b>Cantidad de habitaciones:</b>
+              </td>
+              <td>
+                <b>Cantidad de habitaciones:</b>
+              </td>
+              <td>
+                <b>Cantidad de habitaciones:</b>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button>AGREGAR</button>
+              </td>
+              <td>
+                <button>AGREGAR</button>
+              </td>
+              <td>
+                <button>AGREGAR</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <table>
+          <tbody>
+            <tr>
+              <th className={styles.tabs2}>GREEN GARDEN RESORT</th>
+              <th className={styles.tabs2}>BEST WESTERN PLUS</th>
+              <th className={styles.tabs2}>PLAZA INN DOHA</th>
+            </tr>
+            <tr>
+              <td>
+                <ImageWithModal src={greengarden} alt="Picture of the author" />
+              </td>
+              <td>
+                <ImageWithModal src={safilia} alt="Picture of the author" />
+              </td>
+              <td>
+                <ImageWithModal src={plaza} alt="Picture of the author" />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <b>Ubicacion:</b> 5th Avenue Street, Doha Qatar
+              </td>
+              <td>
+                <b>Ubicacion:</b>: Al Safilia Street, 20409 Doha, Qatar
+              </td>
+              <td>
+                <b>Ubicacion:</b> Old Salata Area, Al Meena Street, Doha, Qatar
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <b>Disponible:</b> no
+              </td>
+              <td>
+                <b>Disponible:</b> no
+              </td>
+              <td>
+                <b>Disponible:</b> si
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <b>Estrellas:</b> 3
+              </td>
+              <td>
+                <b>Estrellas:</b> 4
+              </td>
+              <td>
+                <b>Estrellas:</b> 3
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <b>Precio:</b> $1500
+              </td>
+              <td>
+                <b>Precio:</b> $2500
+              </td>
+              <td>
+                <b>Precio:</b> $2000
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <b>Cantidad de habitaciones:</b>
+              </td>
+              <td>
+                <b>Cantidad de habitaciones:</b>
+              </td>
+              <td>
+                <b>Cantidad de habitaciones:</b>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button>AGREGAR</button>
+              </td>
+              <td>
+                <button>AGREGAR</button>
+              </td>
+              <td>
+                <button>AGREGAR</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   );

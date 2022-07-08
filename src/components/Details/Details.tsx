@@ -1,16 +1,36 @@
-import React from 'react';
-import paquete from '../_package.json';
-import styles from './Details.module.css';
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { getPackage } from 'actions';
 
-const DetailPackage = ({ paq }) => {
-  console.log(paq);
+const mapDispatchToProps = (dispatch: Function) => ({
+  attemptGetPackage: async (id, setErrors: Function) => {
+    try {
+      return await dispatch(getPackage(id));
+    } catch (error: any) {
+      setErrors(error?.response?.data);
+      return [];
+    }
+  },
+});
+
+const DetailPackage = ({ attemptGetPackage }) => {
+  console.log(attemptGetPackage);
+  const [package, setPacakge] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      const p = await attemptGetPackage((error) => {
+        console.log(error);
+      });
+      setPacakge(p);
+    })();
+  }, [setPacakge, attemptGetPackage]);
+
   return (
-    <div className={styles.details}>
-      <h1>{paquete.name}</h1>
-      <p>{'Descripcion: ' + paquete.description}</p>
-      <p>{'Precio: ' + paquete.price}</p>
+    <div>
+      <h1>{package}</h1>
     </div>
   );
 };
 
-export default DetailPackage;
+export default connect(null, mapDispatchToProps)(DetailPackage);

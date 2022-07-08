@@ -55,4 +55,3 @@ export const updatePolicy = (id, data) => async (dispatch: Function) => {
 
   return response.data.policy;
 };
-

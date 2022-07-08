@@ -55,4 +55,3 @@ export const updateTransport = (id, data) => async (dispatch: Function) => {
 
   return response.data.transport;
 };
-

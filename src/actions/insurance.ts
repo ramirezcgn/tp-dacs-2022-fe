@@ -55,4 +55,3 @@ export const updateInsurance = (id, data) => async (dispatch: Function) => {
 
   return response.data.insurance;
 };
-

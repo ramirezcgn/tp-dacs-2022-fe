@@ -1,6 +1,6 @@
 import { Chart, ArcElement } from 'chart.js';
 import Head from 'next/head';
-import styles from './index.module.css';
+import styles from 'styles/global.module.css';
 import Content from 'components/Content/Content';
 import Header from 'components/Header/Header';
 import LeftNavbar from 'components/LeftNavbar/LeftNavbar';
