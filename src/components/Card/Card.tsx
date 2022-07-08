@@ -11,7 +11,7 @@ import {
   CardBody,
 } from 'reactstrap';
 
-export const Card = (props) => {
+export const Card = () => {
   return (
     <CardGroup>
       <ReactrapCard>

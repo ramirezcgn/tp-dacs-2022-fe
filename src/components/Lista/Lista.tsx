@@ -25,7 +25,7 @@ const ListPackages = ({ attemptGetPackages }) => {
       });
       setPacakges(packages);
     })();
-  }, [setPacakges]);
+  }, [setPacakges, attemptGetPackages]);
 
   return (
     <div>

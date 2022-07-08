@@ -3,6 +3,7 @@ import styles from 'styles/global.module.css';
 import { Doughnut } from 'react-chartjs-2';
 
 //data for bar chart
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const data = {
   labels: [
     'January',

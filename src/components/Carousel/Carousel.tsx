@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styles from './Carousel.module.scss';
-
+import Image from 'next/image';
 import {
   Carousel as ReactrapCarousel,
   CarouselItem,
@@ -25,6 +25,8 @@ const items = [
 ];
 
 export class Carousel extends Component {
+  animating: boolean;
+
   constructor(props) {
     super(props);
     this.state = { activeIndex: 0 };
@@ -33,6 +35,7 @@ export class Carousel extends Component {
     this.goToIndex = this.goToIndex.bind(this);
     this.onExiting = this.onExiting.bind(this);
     this.onExited = this.onExited.bind(this);
+    this.animating = false;
   }
 
   onExiting() {
@@ -76,7 +79,7 @@ export class Carousel extends Component {
           onExited={this.onExited}
           key={item.src}
         >
-          <img src={item.src} alt={item.altText} />
+          <Image src={item.src} alt={item.altText} />
           <CarouselCaption
             captionText={item.caption}
             captionHeader={item.caption}
