@@ -35,7 +35,7 @@
     "next": "12.1.6",
     "next-images": "^1.7.0",
     "next-pwa": "^5.5.2",
-    "react": "18.1.0",
+    "react": "18.2.0",
     "react-bootstrap-typeahead": "^6.0.0-rc.1",
     "react-chartjs-2": "^4.2.0",
     "react-dom": "18.1.0",
@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "@types/node": "^17.0.35",
-    "@types/react": "^18.0.9",
+    "@types/react": "^18.0.15",
     "@types/recompose": "^0.30.10",
     "@typescript-eslint/eslint-plugin": "^5.26.0",
     "@typescript-eslint/parser": "^5.26.0",
