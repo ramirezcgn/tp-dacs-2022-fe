@@ -1,14 +1,13 @@
 .lista {
-    display: flex;  
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 30px;
-    padding: 40px;
-    
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  padding: 40px;
+}
+
+@media (max-width: 560px) {
+  .moviesGrid {
+    grid-template-columns: 100%;
   }
-  
-  @media (max-width: 560px) {
-    .moviesGrid {
-      grid-template-columns: 100%;
-    }
-  }
+}

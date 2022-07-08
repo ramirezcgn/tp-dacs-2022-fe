@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint src --max-warnings=0",
-    "lint-fix": "eslint src --fix",
+    "lint-fix": "eslint src --fix && prettier --write \"src/**/*.*\"",
     "typecheck": "tsc --project tsconfig.json --noEmit",
     "generate": "npm run plop --plopfile ./generators/plopfile.js",
     "open-browser": "start http://localhost:3000",

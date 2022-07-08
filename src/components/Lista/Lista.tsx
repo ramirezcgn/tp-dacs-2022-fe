@@ -15,7 +15,7 @@ const mapDispatchToProps = (dispatch: Function) => ({
   },
 });
 
-const ListPackages = ({attemptGetPackages}) => {
+const ListPackages = ({ attemptGetPackages }) => {
   const [packages, setPacakges] = useState([]);
 
   useEffect(() => {

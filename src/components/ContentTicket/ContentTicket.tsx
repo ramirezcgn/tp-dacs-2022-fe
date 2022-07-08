@@ -1,22 +1,15 @@
-import React, { useState, useCallback } from 'react';
-import styles from "styles/global.module.css";
-import Image from 'next/image';
-import camellos from 'resources/images/camellos.jpg';
-import museo1 from 'resources/images/museo1.jpg';
-import museo2 from 'resources/images/museo2.jpg';
-import museo3 from 'resources/images/museo3.jpg';
-import parque from 'resources/images/parque.jpg';
-import museo4 from 'resources/images/museo4.jpg';
+import React from 'react';
+import styles from 'styles/global.module.css';
+import camellos from '/public/img/camellos.jpg';
+import museo1 from '/public/img/museo1.jpg';
+import museo2 from '/public/img/museo2.jpg';
+import museo3 from '/public/img/museo3.jpg';
+import parque from '/public/img/parque.jpg';
+import museo4 from '/public/img/museo4.jpg';
 import Link from 'next/link';
-import Saraza from './components/Saraza';
+import ImageWithModal from './components/ImageWithModal';
 
 function ContentPaquete() {
-  const [showModal, changeShowModal] = useState(false);
-
-  const toggleModal = useCallback(() => {
-    changeShowModal((u) => !u);
-  }, [changeShowModal]);
-
   return (
     <div className={styles.contentcontainer}>
       <div className={styles.contentwrapper}>
@@ -53,7 +46,6 @@ function ContentPaquete() {
           </div>
         </div>
       </div>
-
       <div>
         <table>
           <tr>
@@ -67,28 +59,13 @@ function ContentPaquete() {
           </tr>
           <tr>
             <td>
-              <Image
-                src={camellos}
-                alt="Picture of the author"
-                width={500}
-                height={400}
-              />
+              <ImageWithModal src={camellos} alt="Picture of the author" />
             </td>
             <td>
-              <Image
-                src={museo1}
-                alt="Picture of the author"
-                width={500}
-                height={400}
-              />
+              <ImageWithModal src={museo1} alt="Picture of the author" />
             </td>
             <td>
-              <Image
-                src={museo2}
-                alt="Picture of the author"
-                width={500}
-                height={400}
-              />
+              <ImageWithModal src={museo2} alt="Picture of the author" />
             </td>
           </tr>
           <tr>
@@ -168,13 +145,13 @@ function ContentPaquete() {
           </tr>
           <tr>
             <td>
-              <Saraza src={museo3} texto="Picture of the author" />
+              <ImageWithModal src={museo3} alt="Picture of the author" />
             </td>
             <td>
-              <Saraza src={parque} texto="Picture of the author" />
+              <ImageWithModal src={parque} alt="Picture of the author" />
             </td>
             <td>
-              <Saraza src={museo4} texto="Picture of the author" />
+              <ImageWithModal src={museo4} alt="Picture of the author" />
             </td>
           </tr>
           <tr>

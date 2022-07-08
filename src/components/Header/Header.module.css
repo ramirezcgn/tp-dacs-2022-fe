@@ -1,52 +1,50 @@
 /* header css starts  */
 
-.headcontainer{
+.headcontainer {
   display: flex;
   flex-wrap: wrap;
-  height:50px;
+  height: 50px;
   background-color: rgb(255, 255, 255);
-  margin-left:200px;
+  margin-left: 200px;
   /* z-index: -1; */
-
 }
-.headwrapper{
+.headwrapper {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
 }
 
-.title{
+.title {
   margin-left: 40px;
 }
-.title>h2{
-  color: rgb(0, 0, 0);;
+.title > h2 {
+  color: rgb(0, 0, 0);
 }
-.title>p{
-  color: rgb(0, 0, 0);;
+.title > p {
+  color: rgb(0, 0, 0);
 }
-  .title > h2 > span {
-      color: #D5CCCA;
-  }
-.profile{
+.title > h2 > span {
+  color: #d5ccca;
+}
+.profile {
   position: absolute;
-  right:20px;
+  right: 20px;
 }
-.image{
+.image {
   width: 40px;
-  height:40px;
+  height: 40px;
   border-radius: 50%;
   cursor: pointer;
 }
 
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */
-  .headcontainer{
-      width: 100%;
-      margin-left: 70px;
+  .headcontainer {
+    width: 100%;
+    margin-left: 70px;
   }
-  .profile{
-      position: absolute;
-      right:0px;
+  .profile {
+    position: absolute;
+    right: 0px;
   }
-
 }
