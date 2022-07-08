@@ -83,7 +83,7 @@ export class Carousel extends Component {
             src={item.src}
             alt={item.altText}
             width="1100"
-            height="500"
+            height="400"
             layout="responsive"
           />
           <CarouselCaption
