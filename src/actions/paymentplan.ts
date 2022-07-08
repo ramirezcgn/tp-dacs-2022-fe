@@ -55,4 +55,3 @@ export const updatePaymentplan = (id, data) => async (dispatch: Function) => {
 
   return response.data.paymentplan;
 };
-

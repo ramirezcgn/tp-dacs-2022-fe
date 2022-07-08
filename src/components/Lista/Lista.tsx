@@ -5,11 +5,11 @@ import styles from './lista.module.css';
 import { getPackages } from 'actions';
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  attemptGetPackages: async (setErrors: Function) => {
+  attemptGetPackages: async () => {
     try {
       return await dispatch(getPackages());
     } catch (error: any) {
-      setErrors(error?.response?.data);
+      console.log(error);
       return [];
     }
   },
@@ -20,9 +20,7 @@ const ListPackages = ({ attemptGetPackages }) => {
 
   useEffect(() => {
     (async () => {
-      const p = await attemptGetPackages((error) => {
-        console.log(error);
-      });
+      const p = await attemptGetPackages();
       setPacakges(p);
     })();
   }, [setPacakges, attemptGetPackages]);

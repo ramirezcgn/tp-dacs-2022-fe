@@ -20,7 +20,7 @@ export const getTicket = (id) => async (dispatch: Function) => {
     user: response.data.ticket,
   });
 
-  return response.data.ticket
+  return response.data.ticket;
 };
 
 export const createTicket = (data) => async (dispatch: Function) => {
@@ -55,4 +55,3 @@ export const updateTicket = (id, data) => async (dispatch: Function) => {
 
   return response.data.ticket;
 };
-

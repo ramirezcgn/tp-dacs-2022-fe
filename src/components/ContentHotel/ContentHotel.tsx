@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from 'styles/global.module.css';
-import image1 from './image1.jpg';
+import image1 from '/public/img/image1.jpg';
 import Image from 'next/image';
 import Link from 'next/link';
 

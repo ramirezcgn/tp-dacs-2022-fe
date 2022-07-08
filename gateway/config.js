@@ -4,12 +4,16 @@ module.exports = {
   routes: [
     {
       prefix: '/api',
-      target: 'https://httpbin.org',
+      target: 'http://dacs_be:3001',
     },
+    /*{
+      prefix: '_next/static',
+      target: 'http://dacs_fe:3000/.next/static',
+    },*/
     {
-      proxyType: 'websocket',
-      prefix: '/echo',
-      target: 'ws://ws.ifelse.io',
+      prefix: '/',
+      urlRewrite: ({ url }) => url.replace(/(_next)/, '.next'),
+      target: 'http://dacs_fe:3000',
     },
   ],
 };

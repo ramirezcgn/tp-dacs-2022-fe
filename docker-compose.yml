@@ -4,5 +4,11 @@ services:
     image: "kyberneees/rproxy:latest"
     ports:
       - "8080:8080"
+    volumes:
+      - ./gateway/config.js:/rproxy/src/config.js
+    hostname: "dacs_gateway"
   dacs_fe:
     build: .
+    ports:
+      - "3000:3000"
+    hostname: "dacs_fe"
