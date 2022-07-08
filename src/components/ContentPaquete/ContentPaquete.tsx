@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './ContentPaquete.module.css';
+import styles from 'styles/global.module.css';
 import Link from 'next/link';
 
 function ContentPaquete() {
