@@ -115,17 +115,6 @@ function ContentPaquete() {
             </tr>
             <tr>
               <td>
-                <b>Cantidad de entradas:</b>
-              </td>
-              <td>
-                <b>Cantidad de entradas:</b>
-              </td>
-              <td>
-                <b>Cantidad de entradas:</b>
-              </td>
-            </tr>
-            <tr>
-              <td>
                 <button>AGREGAR</button>
               </td>
               <td>
@@ -199,17 +188,6 @@ function ContentPaquete() {
               </td>
               <td>
                 <b>Precio:</b> $2500
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <b>Cantidad de entradas:</b>
-              </td>
-              <td>
-                <b>Cantidad de entradas:</b>
-              </td>
-              <td>
-                <b>Cantidad de entradas:</b>
               </td>
             </tr>
             <tr>
