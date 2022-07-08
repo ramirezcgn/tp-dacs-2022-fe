@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styles from './Carousel.module.scss';
 import Image from 'next/image';
 import {
-  Carousel as ReactrapCarousel,
+  Carousel as ReacstrapCarousel,
   CarouselItem,
   CarouselControl,
   CarouselIndicators,
@@ -15,11 +15,11 @@ const items = [
     altText: 'Slide 1',
   },
   {
-    src: './img/qatar2022.jpg',
+    src: '/img/qatar2022.jpg',
     altText: 'Slide 2',
   },
   {
-    src: './img/grupos.jpg',
+    src: '/img/grupos.jpg',
     altText: 'Slide 3',
   },
 ];
@@ -79,7 +79,13 @@ export class Carousel extends Component {
           onExited={this.onExited}
           key={item.src}
         >
-          <Image src={item.src} alt={item.altText} />
+          <Image
+            src={item.src}
+            alt={item.altText}
+            width="1100"
+            height="500"
+            layout="responsive"
+          />
           <CarouselCaption
             captionText={item.caption}
             captionHeader={item.caption}
@@ -89,7 +95,7 @@ export class Carousel extends Component {
     });
 
     return (
-      <ReactrapCarousel
+      <ReacstrapCarousel
         className={styles.contenedor}
         activeIndex={activeIndex}
         next={this.next}
@@ -111,7 +117,7 @@ export class Carousel extends Component {
           directionText="Next"
           onClickHandler={this.next}
         />
-      </ReactrapCarousel>
+      </ReacstrapCarousel>
     );
   }
 }

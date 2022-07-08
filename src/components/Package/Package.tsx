@@ -1,6 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import styles from './Package.module.css';
 
 const ItemPackage = ({ paq }) => {
@@ -9,7 +8,7 @@ const ItemPackage = ({ paq }) => {
       <div className={styles.paquete}>
         <li>
           <div className={styles.imagen_conteiner}>
-            <Image src={paq.image} alt="Foto" width="750" height="500" />
+            <img src={paq?.image} alt="Foto" width="750" height="500" />
           </div>
           <div className={styles.texto_conteiner}>
             <h1>{paq.name}</h1>

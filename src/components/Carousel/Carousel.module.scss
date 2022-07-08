@@ -4,4 +4,10 @@
     height: 500px;
     object-fit: fill;
   }
+
+  .carousel-item {
+    span {
+      width: 100% !important;
+    }
+  }
 }
