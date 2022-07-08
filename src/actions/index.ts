@@ -2,3 +2,8 @@ export * from './requests';
 export * from './session';
 export * from './user';
 export * from './packages';
+export * from './booking';
+export * from './passenger';
+export * from './payment';
+export * from './paymentplan';
+export * from './ticket';
