@@ -9,8 +9,6 @@ const ImageWithModal = ({ src, alt }) => {
     changeShowModal((u) => !u);
   }, [changeShowModal]);
 
-  console.log(src);
-
   return (
     <>
       <Image src={src} alt={alt} width={500} height={400} />

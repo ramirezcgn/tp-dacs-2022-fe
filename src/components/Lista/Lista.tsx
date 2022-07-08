@@ -20,10 +20,10 @@ const ListPackages = ({ attemptGetPackages }) => {
 
   useEffect(() => {
     (async () => {
-      const packages = await attemptGetPackages((data) => {
-        console.log(data);
+      const p = await attemptGetPackages((error) => {
+        console.log(error);
       });
-      setPacakges(packages);
+      setPacakges(p);
     })();
   }, [setPacakges, attemptGetPackages]);
 
