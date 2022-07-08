@@ -51,6 +51,7 @@ function ContentHotel() {
           <tbody>
             <tr>
               <th className={styles.tabs2}>HOTEL HILTON DOHA</th>
+
               <th className={styles.tabs2}>GOLDEN OCEAN HOTEL</th>
               <th className={styles.tabs2}>OUTLANDING APART</th>
             </tr>
@@ -138,6 +139,7 @@ function ContentHotel() {
             <tr>
               <th className={styles.tabs2}>GREEN GARDEN RESORT</th>
               <th className={styles.tabs2}>BEST WESTERN PLUS</th>
+
               <th className={styles.tabs2}>PLAZA INN DOHA</th>
             </tr>
             <tr>
